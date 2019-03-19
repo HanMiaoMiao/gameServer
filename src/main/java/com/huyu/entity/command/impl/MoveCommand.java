@@ -18,31 +18,26 @@ public class MoveCommand extends Command {
         super(playerName);
     }
     @Override
-    public MessageProtocol excute() {
-        byte[] bc = ConvertFunction.toByte(this);
-        MessageProtocol messageProtocol = new MessageProtocol(bc.length,Signe.H3,bc);
-        return messageProtocol;
-    }
-
-    @Override
     public MessageProtocol serverExcute() {
-        System.out.println("serverExcute");
+        //在线玩家
         HashMap<String,Player> map = OnlinePlayer.getOnlinePlayer().getPlayers();
+        //
         Player player = map.get(super.getPlayerName());
-        System.out.println(player);
+
         String option = super.getOption();
-        System.out.println(option);
         ArrayList<Scence> borderScence = player.getCurrentlyScene().getBorderScene();
         MessageProtocol messageProtocol;
+        //遍历集合，能否移动到要去的场景
         for (Scence s : borderScence) {
             if(s.getSceneName().equals(option)){
-                System.out.println(option);
+                //从当前场景中移除player
                 player.getCurrentlyScene().getPlayers().remove(player);
+                //将player加入到新场景
                 s.getPlayers().add(player);
                 player.setCurrentlyScene(s);
                 byte[] bytes = ConvertFunction.toByte(s);
+                //将场景信息返回给客户端
                 messageProtocol = new MessageProtocol(bytes.length,Type.SCENCE,bytes);
-                System.out.println(messageProtocol);
                 return messageProtocol;
             }
         }

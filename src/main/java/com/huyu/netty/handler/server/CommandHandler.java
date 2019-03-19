@@ -8,6 +8,9 @@ import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 处理其它的命令
+ */
 public class CommandHandler extends ChannelHandlerAdapter {
     final static Logger logger = LoggerFactory.getLogger(CommandHandler.class);
 
@@ -26,8 +29,9 @@ public class CommandHandler extends ChannelHandlerAdapter {
         MessageProtocol mg = (MessageProtocol)msg;
         byte[] bytes = mg.getContent();
         Command command = (Command) ConvertFunction.fromByte(bytes);
+        //多态执行不同的命令，得到命令返回值
         MessageProtocol m = command.serverExcute();
-        System.out.println(m);
+
         ctx.channel().writeAndFlush(m);
     }
 }

@@ -1,14 +1,28 @@
 package com.huyu.entity.command;
 
 import com.huyu.netty.protocol.MessageProtocol;
+import com.huyu.netty.protocol.Signe;
+import com.huyu.netty.util.ConvertFunction;
 
 import java.io.Serializable;
 
 public abstract class Command implements Serializable{
     private static final long  SerialVersionUID = 1L;
+    /**
+     * 命令类型
+     */
     private int commandSign;
+    /**
+     * 执行者
+     */
     private String playerName;
+    /**
+     * 命令名称
+     */
     private String commandName;
+    /**
+     * 命令参数
+     */
     private String option;
 
 
@@ -19,7 +33,20 @@ public abstract class Command implements Serializable{
        this.playerName = playerName;
     }
 
-    public abstract MessageProtocol excute()  ;
+    /**
+     * 封装客户端的命令
+     * @return
+     */
+    public MessageProtocol excute() {
+        byte[] bc = ConvertFunction.toByte(this);
+        MessageProtocol messageProtocol = new MessageProtocol(bc.length, Signe.H3,bc);
+        return messageProtocol;
+    }
+
+    /**
+     * 执行客户端的命令
+     * @return
+     */
     public abstract MessageProtocol serverExcute() ;
 
     public static long getSerialVersionUID() {

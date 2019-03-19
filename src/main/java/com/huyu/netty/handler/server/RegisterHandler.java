@@ -17,6 +17,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 
+/**
+ * 处理注册请求
+ */
 @Component("registerHandler")
 public class RegisterHandler  extends ChannelHandlerAdapter {
     private final static Logger logger = LoggerFactory.getLogger(RegisterHandler.class);
@@ -27,20 +30,19 @@ public class RegisterHandler  extends ChannelHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("连接到服务器");
     }
-
-
-
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         logger.info("RegisterHandler.channelRead()");
         System.out.println("RegisterHandler.channelRead()");
         MessageProtocol mg = (MessageProtocol)msg;
-        System.out.println(mg.getSign());
-        System.out.println(Signe.H1);
+        //System.out.println(mg.getSign());
+        //System.out.println(Signe.H1);
+        //验证是否是注册请求
         if(mg.getSign()== Signe.H1){
             //在service设置玩家的信息
             Player player = (Player) ConvertFunction.fromByte(mg.getContent());
             String inform = null;
+            //service检查用户名是否重复，若没有重复，则添加玩家信息到数据库，返回给客户端
             if(playerService.addPlayer(player)) {
                 inform = "            注册成功!";
 
@@ -52,6 +54,7 @@ public class RegisterHandler  extends ChannelHandlerAdapter {
             ctx.writeAndFlush(response);
             System.out.println(response);
         }else{
+            //不是登录请求，交给后面的handler处理
             ctx.fireChannelRead(msg);
         }
     }

@@ -7,7 +7,13 @@ import java.util.ArrayList;
 
 public class Scence implements Serializable {
     private static final long  SerialVersionUID = 1L;
+    /**
+     * 相邻的场景
+     */
     private ArrayList<Scence> borderScene;
+    /**
+     * 场景中的玩家
+     */
     private ArrayList<Player> players ;
     private Integer sceneId;
     private String sceneName;

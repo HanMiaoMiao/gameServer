@@ -15,6 +15,7 @@ public class ServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
+        //加载spring容器
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         LoginHandler loginHandler = (LoginHandler)context.getBean("loginHandler") ;
         RegisterHandler registerHandler =(RegisterHandler) context.getBean("registerHandler");

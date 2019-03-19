@@ -7,12 +7,17 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Player implements Serializable {
-    //玩家当前场景
     private static final long  SerialVersionUID = 1L;
     private Integer playerId;
     private String playerName;
+    /**
+     * 玩家当前场景
+     */
     private Scence currentlyScene;
-    private int   status = 1;
+    /**
+     * 生存状态
+     */
+    private int  status = 1;
     private String password;
 
     public Scence getCurrentlyScene() {
@@ -41,22 +46,6 @@ public class Player implements Serializable {
 
     public void setCurrentlyScene(Scence currentlyScene) {
         this.currentlyScene = currentlyScene;
-    }
-
-
-    public void move(Begin goingScene){
-        for (Scence c: currentlyScene.getBorderScene()) {
-            if(c.getSceneName().equals(goingScene.getSceneName())){
-                //移除实体
-                currentlyScene.getPlayers().remove(this);
-                setCurrentlyScene(goingScene);
-                //添加实体
-                goingScene.getPlayers().add(this);
-                System.out.println("您已到达:  "+goingScene.getSceneName());
-                return;
-            }
-        }
-        System.out.println("您不能直接到达:  "+goingScene.getSceneName());
     }
 
     @Override

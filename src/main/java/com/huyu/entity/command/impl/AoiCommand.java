@@ -16,19 +16,13 @@ public class AoiCommand extends Command {
     }
 
     @Override
-    public MessageProtocol excute() {
-        //System.out.println("excute");
-        byte[] bc = ConvertFunction.toByte(this);
-        MessageProtocol messageProtocol = new MessageProtocol(bc.length, Signe.H3,bc);
-        return messageProtocol;
-    }
-
-    @Override
     public MessageProtocol serverExcute() {
-        //System.out.println("serverExcute");
         HashMap<String, Player> map = OnlinePlayer.getOnlinePlayer().getPlayers();
+        //由命令执行者得到Player对象
         Player player = map.get(super.getPlayerName());
+        //从player中得到玩家当前所在的场景，再得到场景中的玩家
         byte[] bytes = ConvertFunction.toByte(player.getCurrentlyScene().getPlayers());
+        //
         MessageProtocol messageProtocol = new MessageProtocol(bytes.length, Type.PLAYER,bytes);
         //System.out.println(messageProtocol);
         return messageProtocol;
