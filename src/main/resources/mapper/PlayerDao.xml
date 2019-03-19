@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--关联接口的全限定名-->
+<mapper namespace="com.huyu.dao.PlayerDao">
+    <!--大配置中settings autoMappingBehavior NONE,所以数据库只会装配以下column-->
+    <resultMap id="playerMap" type="com.huyu.pojo.Player">
+        <id property="playerId" column="player_id"/>
+        <result property="playerName" column="player_name"/>
+        <result property="currentlyScene" column="currently_scene"/>
+        <result property="password" column="password"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    <!--id要与接口中的方法名相同-->
+
+    <select id="findByName" parameterType="String" resultMap="playerMap">
+        select * from player where player_name = #{playerName}
+    </select>
+
+    <insert id="addPlayer" parameterType ="com.huyu.pojo.Player" useGeneratedKeys="true" keyProperty="playerId">
+        insert into player(player_id,player_name, password, currently_scene, status) values (#{playerId},#{playerName},#{password},#{currentlyScene},#{status})
+    </insert>
+
+    <update id="updatePlayer" parameterType="com.huyu.pojo.Player">
+        update  player
+        <set>
+            <if test="password != null">password=#{password},</if>
+            <if test="currently_scene != null">currently_scene=#{currentlyScene},</if>
+            <if test="status != null">status=#{status}</if>
+        </set>
+        where player_name = #{playerName}
+    </update>
+
+    <delete id="deletePlayerByName" parameterType="String">
+        delete from player where player_name = #{_parameter}
+    </delete>
+</mapper>
+
+
