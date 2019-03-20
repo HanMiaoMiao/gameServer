@@ -2,23 +2,20 @@ package com.huyu.netty.handler.server;
 
 import com.huyu.netty.decoder.MessageDecoder;
 import com.huyu.netty.encoder.MessageEncoder;
-
-import com.huyu.service.Register;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ServerInitializer extends ChannelInitializer<SocketChannel> {
-
+     public static ApplicationContext CONTEXT = new ClassPathXmlApplicationContext("applicationContext.xml");
 
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         //加载spring容器
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        LoginHandler loginHandler = (LoginHandler)context.getBean("loginHandler") ;
-        RegisterHandler registerHandler =(RegisterHandler) context.getBean("registerHandler");
+        LoginHandler loginHandler = (LoginHandler)CONTEXT.getBean("loginHandler") ;
+        RegisterHandler registerHandler =(RegisterHandler) CONTEXT.getBean("registerHandler");
         socketChannel.pipeline()
                 //编码
                 .addLast(new MessageEncoder())

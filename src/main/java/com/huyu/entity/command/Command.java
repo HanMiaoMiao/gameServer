@@ -1,10 +1,13 @@
 package com.huyu.entity.command;
 
+import com.huyu.entity.Player;
+import com.huyu.entity.scence.OnlinePlayer;
 import com.huyu.netty.protocol.MessageProtocol;
 import com.huyu.netty.protocol.Signe;
 import com.huyu.netty.util.ConvertFunction;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public abstract class Command implements Serializable{
     private static final long  SerialVersionUID = 1L;
@@ -23,8 +26,9 @@ public abstract class Command implements Serializable{
     /**
      * 命令参数
      */
-    private String option;
+    private String[] option;
 
+    private HashMap<String, Player> map = OnlinePlayer.getOnlinePlayer().getPlayers();
 
     public Command() {
     }
@@ -61,11 +65,11 @@ public abstract class Command implements Serializable{
         this.commandName = commandName;
     }
 
-    public String getOption() {
+    public String[] getOption() {
         return option;
     }
 
-    public void setOption(String option) {
+    public void setOption(String[] option) {
         this.option = option;
     }
 
@@ -83,5 +87,13 @@ public abstract class Command implements Serializable{
 
     public void setPlayerName(String playerName) {
         this.playerName = playerName;
+    }
+
+    public HashMap<String, Player> getMap() {
+        return map;
+    }
+
+    public void setMap(HashMap<String, Player> map) {
+        this.map = map;
     }
 }

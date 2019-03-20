@@ -1,50 +1,31 @@
 package com.huyu.entity.scence;
 
+import com.huyu.entity.Monster;
+import com.huyu.entity.NPC;
 import com.huyu.entity.Player;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Scence implements Serializable {
-    private static final long  SerialVersionUID = 1L;
-    /**
-     * 相邻的场景
-     */
-    private ArrayList<Scence> borderScene;
-    /**
-     * 场景中的玩家
-     */
-    private ArrayList<Player> players ;
-    private Integer sceneId;
+    private static final long SerialVersionUID = 1L;
+    private static Integer sceneId;
     private String sceneName;
-    public Scence(ArrayList<Scence> borderScene, ArrayList<Player> players, Integer sceneId, String sceneName) {
-        this.borderScene = borderScene;
-        this.players = players;
-        this.sceneId = sceneId;
-        this.sceneName = sceneName;
-    }
-    public  ArrayList<Scence> getBorderScene() {
-        return borderScene;
-    }
+    private Map<String, Scence> borderScene;
+    private static HashMap<String, Player> players = new HashMap<>();
 
-    public void setBorderScene(ArrayList<Scence> borderScene) {
-        this.borderScene = borderScene;
-    }
 
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
+    private Map<Integer, NPC> npcs;
+    //怪物
+    private Map<Integer, Monster> monsters;
 
-    public  void setPlayers(ArrayList<Player> players) {
-        this.players = players;
-    }
-
-    public Integer getSceneId() {
+    public static Integer getSceneId() {
         return sceneId;
     }
 
-    public void setSceneId(Integer sceneId) {
-        this.sceneId = sceneId;
+    public static void setSceneId(Integer sceneId) {
+        Scence.sceneId = sceneId;
     }
 
     public String getSceneName() {
@@ -53,5 +34,37 @@ public class Scence implements Serializable {
 
     public void setSceneName(String sceneName) {
         this.sceneName = sceneName;
+    }
+
+    public Map<String, Scence> getBorderScene() {
+        return borderScene;
+    }
+
+    public void setBorderScene(Map<String, Scence> borderScene) {
+        this.borderScene = borderScene;
+    }
+
+    public HashMap<String, Player> getPlayers() {
+        return players;
+    }
+
+    public static void setPlayers(HashMap<String, Player> players) {
+        Scence.players = players;
+    }
+
+    public Map<Integer, NPC> getNpcs() {
+        return npcs;
+    }
+
+    public void setNpcs(Map<Integer, NPC> npcs) {
+        this.npcs = npcs;
+    }
+
+    public Map<Integer, Monster> getMonsters() {
+        return monsters;
+    }
+
+    public void setMonsters(Map<Integer, Monster> monsters) {
+        this.monsters = monsters;
     }
 }

@@ -1,15 +1,12 @@
 package com.huyu.pojo;
 
-import com.huyu.entity.scence.Scence;
-
-import java.util.Arrays;
-
 public class Player {
     private Integer playerId;
     private String playerName;
-    private byte[] currentlyScene;
+    private String currentlyScene;
     private int status = 1;
     private String password;
+    private int backpackID;
 
     public Integer getPlayerId() {
         return playerId;
@@ -19,21 +16,7 @@ public class Player {
         this.playerId = playerId;
     }
 
-    public String getPlayName() {
-        return playerName;
-    }
 
-    public void setPlayName(String playName) {
-        this.playerName = playName;
-    }
-
-    public byte[] getCurrentlyScene() {
-        return currentlyScene;
-    }
-
-    public void setCurrentlyScene(byte[] currentlyScene) {
-        this.currentlyScene = currentlyScene;
-    }
 
     public int getStatus() {
         return status;
@@ -51,14 +34,38 @@ public class Player {
         this.password = password;
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public String getCurrentlyScene() {
+        return currentlyScene;
+    }
+
+    public void setCurrentlyScene(String currentlyScene) {
+        this.currentlyScene = currentlyScene;
+    }
+
     @Override
     public String toString() {
         return "Player{" +
                 "playerId=" + playerId +
                 ", playerName='" + playerName + '\'' +
-                ", currentlyScene=" + Arrays.toString(currentlyScene) +
+                ", currentlyScene='" + currentlyScene + '\'' +
                 ", status=" + status +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public int getBackpackID() {
+        return backpackID;
+    }
+
+    public void setBackpackID(int backpackID) {
+        this.backpackID = backpackID;
     }
 }

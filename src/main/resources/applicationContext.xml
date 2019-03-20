@@ -49,4 +49,203 @@
       <property name="basePackage" value="com.huyu.dao"/>
    </bean>
 
+
+   <!--npc-->
+   <bean id = "101" class="com.huyu.entity.NPC">
+      <property name="npcId" value="101"/>
+      <property name="npcName" value="npc1"/>
+      <property name="talk" value="请在背包查看"/>
+   </bean>
+   <bean id = "102" class="com.huyu.entity.NPC">
+      <property name="npcId" value="102"/>
+      <property name="npcName" value="npc2"/>
+      <property name="talk" value="继续向前走"/>
+   </bean>
+   <bean id = "103" class="com.huyu.entity.NPC">
+      <property name="npcId" value="103"/>
+      <property name="npcName" value="npc3"/>
+      <property name="talk" value="去买药水"/>
+   </bean>
+   <bean id = "105" class="com.huyu.entity.NPC">
+      <property name="npcId" value="105"/>
+      <property name="npcName" value="npc5"/>
+      <property name="talk" value="去买装备"/>
+   </bean>
+   <bean id = "106" class="com.huyu.entity.NPC">
+      <property name="npcId" value="106"/>
+      <property name="npcName" value="npc6"/>
+      <property name="talk" value="恭喜你，升级了"/>
+   </bean>
+   <bean id = "107" class="com.huyu.entity.NPC">
+      <property name="npcId" value="107"/>
+      <property name="npcName" value="npc7"/>
+      <property name="talk" value="去做下个任务吧"/>
+   </bean>
+
+
+   <!--monster-->
+   <bean id="10001" class="com.huyu.entity.Monster">
+      <property name="monsterId" value="10001"/>
+      <property name="monsterName" value="monster1"/>
+      <property name="monsterBlood" value="10000"/>
+      <property name="harm" value="50"/>
+      <property name="status" value="true"/>
+   </bean>
+   <bean id="10002" class="com.huyu.entity.Monster">
+      <property name="monsterId" value="10002"/>
+      <property name="monsterName" value="monster2"/>
+      <property name="monsterBlood" value="10000"/>
+      <property name="harm" value="60"/>
+      <property name="status" value="true"/>
+   </bean>
+   <bean id="10003" class="com.huyu.entity.Monster">
+      <property name="monsterId" value="10003"/>
+      <property name="monsterName" value="monster3"/>
+      <property name="monsterBlood" value="10000"/>
+      <property name="harm" value="70"/>
+      <property name="status" value="true"/>
+   </bean>
+   <bean id="10004" class="com.huyu.entity.Monster">
+      <property name="monsterId" value="10004"/>
+      <property name="monsterName" value="monster4"/>
+      <property name="monsterBlood" value="10000"/>
+      <property name="harm" value="80"/>
+      <property name="status" value="true"/>
+   </bean>
+
+
+
+   <!--scene-->
+  <bean id = "begin" class = "com.huyu.entity.scence.Scence">
+     <property name="sceneName" value = "启始之地"/>
+     <property name="borderScene">
+        <map>
+           <entry key="village">
+              <ref bean="village"/>
+           </entry>
+        </map>
+     </property>
+     <property name="npcs">
+        <map>
+           <entry key="101"  value-ref="101"/>
+           <entry key="102" value-ref="102"/>
+        </map>
+     </property>
+     <property name="monsters">
+        <map>
+           <entry key="10001" value-ref="10001"/>
+        </map>
+     </property>
+  </bean>
+   <bean id = "village" class = "com.huyu.entity.scence.Scence">
+      <property name="sceneName" value = "村子"/>
+      <property name="borderScene">
+         <map key-type="java.lang.String" value-type="com.huyu.entity.scence.Scence">
+            <entry key="begin"  value-ref="begin"/>
+            <entry key="burg" value-ref="burg"/>
+            <entry key="forest" value-ref="forest"/>
+         </map>
+      </property>
+      <property name="npcs">
+         <map>
+            <entry key="103"  value-ref="103"/>
+            <entry key="105" value-ref="105"/>
+         </map>
+      </property>
+      <property name="monsters">
+         <map>
+            <entry key="10002" value-ref="10002"/>
+         </map>
+      </property>
+   </bean>
+   <bean id = "forest" class = "com.huyu.entity.scence.Scence">
+      <property name="sceneName" value = "森林"/>
+      <property name="borderScene">
+         <map>
+            <entry key="village">
+               <ref bean="village"/>
+            </entry>
+         </map>
+      </property>
+      <property name="npcs">
+         <map>
+            <entry key="106"  value-ref="106"/>
+            <entry key="107" value-ref="107"/>
+         </map>
+      </property>
+      <property name="monsters">
+         <map>
+            <entry key="10003" value-ref="10003"/>
+         </map>
+      </property>
+   </bean>
+   <bean id = "burg" class = "com.huyu.entity.scence.Scence">
+      <property name="sceneName" value = "城堡"/>
+      <property name="borderScene">
+         <map>
+            <entry key="village">
+               <ref bean="village"/>
+            </entry>
+         </map>
+      </property>
+      <property name="npcs">
+         <map>
+            <entry key="101"  value-ref="101"/>
+            <entry key="102" value-ref="102"/>
+         </map>
+      </property>
+      <property name="monsters">
+         <map>
+            <entry key="10004" value-ref="10004"/>
+         </map>
+      </property>
+   </bean>
+   <bean id="scenes" class="com.huyu.entity.scence.World">
+      <property name="scences">
+         <map>
+            <entry key="begin"  value-ref="begin"/>
+            <entry key="burg" value-ref="burg"/>
+            <entry key="forest" value-ref="forest"/>
+            <entry key="village" value-ref="village"/>
+         </map>
+      </property>
+   </bean>
+   <!--技能-->
+   <bean id="1" class="com.huyu.entity.Skill" scope="prototype">
+      <property name="skillId" value="1"/>
+      <property name="skillName" value="技能1"/>
+      <property name="cd" value="2000"/>
+      <property name="harm" value="10"/>
+      <property name="mp" value="100"/>
+   </bean>
+   <bean id ="2" class="com.huyu.entity.Skill" scope="prototype">
+      <property name="cd" value="4000"/>
+      <property name="harm" value="30"/>
+      <property name="mp" value="400"/>
+      <property name="skillId" value="2"/>
+      <property name="skillName" value="技能2"/>
+   </bean>
+   <!--药水-->
+   <bean id="301" class="com.huyu.entity.prop.Potion" scope="prototype">
+      <property name="potionId" value="301"/>
+      <property name="mp" value="300"/>
+   </bean>
+   <!--装备-->
+   <bean id="401" class="com.huyu.entity.prop.Equipment" scope="prototype">
+      <property name="equipmentId" value="401"/>
+      <property name="equipmentName" value="大刀"/>
+      <property name="harm" value="10"/>
+      <property name="attack" value="10"/>
+      <property name="durability" value="100"/>
+      <property name="wear" value="false"/>
+   </bean>
+   <bean id="402" class="com.huyu.entity.prop.Equipment" scope="prototype">
+      <property name="equipmentId" value="402"/>
+      <property name="equipmentName" value="盔甲"/>
+      <property name="harm" value="10"/>
+      <property name="attack" value="10"/>
+      <property name="durability" value="100"/>
+      <property name="wear" value="false"/>
+   </bean>
+
 </beans>

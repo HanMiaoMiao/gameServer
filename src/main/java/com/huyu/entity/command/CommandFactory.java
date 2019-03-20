@@ -1,12 +1,9 @@
 package com.huyu.entity.command;
 
-import com.huyu.entity.command.impl.AoiCommand;
-import com.huyu.entity.command.impl.LoginCommand;
-import com.huyu.entity.command.impl.MoveCommand;
-import com.huyu.entity.command.impl.RegisterCommand;
+import com.huyu.entity.command.impl.*;
 
 public class CommandFactory {
-    public static Command creator(String[] split,String playerName){
+    public static Command creator(String[] split, String playerName){
         Command command ;
         if(split.length==1){
             switch (split[0]){
@@ -41,11 +38,61 @@ public class CommandFactory {
 
         }
         if(split.length==2){
-            command = new MoveCommand(playerName);
-            command.setCommandName("move");
-            command.setCommandSign(CommandSign.MOVE);
-            command.setOption(split[1]);
-            return command;
+            switch (split[0]){
+                case "move":{
+                    command = new MoveCommand(playerName);
+                    command.setCommandName("move");
+                    command.setCommandSign(CommandSign.MOVE);
+                    String[] str = {split[1]};
+                    command.setOption(str);
+                    command.setOption(str);
+                    return command;
+                }
+                case "aoi":{
+                    command = new AoiCommand(playerName);
+                    command.setCommandName("aoi");
+                    String[] str = {split[1]};
+                    command.setOption(str);
+                    command.setCommandSign(CommandSign.AOI);
+                    return command;
+                }
+                case "use":{
+                    command = new UseCommand(playerName);
+                    command.setCommandName("use");
+                    String[] str = {split[1]};
+                    command.setOption(str);
+                    command.setCommandSign(CommandSign.USE);
+                    return command;
+                }
+                case "view":{
+                    command = new ViewCommand(playerName);
+                    command.setCommandName("view");
+                    String[] str = {split[1]};
+                    command.setOption(str);
+                    command.setCommandSign(CommandSign.VIEW);
+                    return command;
+                }
+            }
+        }
+        if(split.length==3){
+            switch (split[0]){
+                case "speak":{
+                    command = new SpeakCommand(playerName);
+                    command.setCommandName("speak");
+                    String[] str = {split[1],split[2]};
+                    command.setOption(str);
+                    command.setCommandSign(CommandSign.SPEAK);
+                    return command;
+                }
+                case "attack":{
+                    command = new AttackCommand(playerName);
+                    command.setCommandName("attack");
+                    String[] str = {split[1],split[2]};
+                    command.setOption(str);
+                    command.setCommandSign(CommandSign.ATTACK);
+                    return command;
+                }
+            }
         }
         return null;
     }

@@ -1,20 +1,13 @@
 package com.huyu.netty.client;
 
 
-import com.huyu.dao.PlayerDao;
-import com.huyu.entity.Player;
 import com.huyu.netty.handler.client.ClientInitializer;
-import com.huyu.netty.handler.server.LoginHandler;
-import com.huyu.service.PlayerService;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.CountDownLatch;
 

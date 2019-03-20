@@ -1,5 +1,7 @@
 package com.huyu.netty.client;
 
+import com.huyu.entity.Monster;
+import com.huyu.entity.NPC;
 import com.huyu.entity.Player;
 import com.huyu.entity.command.Command;
 import com.huyu.entity.command.CommandFactory;
@@ -7,10 +9,10 @@ import com.huyu.entity.scence.Scence;
 import com.huyu.netty.handler.client.ClientInitializer;
 import com.huyu.netty.protocol.MessageProtocol;
 import com.huyu.netty.util.ConvertFunction;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 
@@ -19,7 +21,7 @@ public class MainPage {
     private ClientInitializer clientInitializer;
     private ClientMain clientMain;
 
-    public MainPage(ClientMain clientMain,CountDownLatch latch) {
+    public MainPage(ClientMain clientMain, CountDownLatch latch) {
         this.clientMain = clientMain;
         this.clientInitializer = clientMain.clientInitializer;
         this.latch = latch;
@@ -104,17 +106,31 @@ public class MainPage {
     //场景
     public void scence(MessageProtocol result) throws ClassNotFoundException {
         Scence scence = (Scence) ConvertFunction.fromByte(result.getContent());
+        System.out.println(" 你当前所在的场景是："+scence.getSceneName());
         System.out.println("************************************");
-        System.out.println("       你已到达："+scence.getSceneName());
         System.out.println("************************************");
-        System.out.println("************************************");
-        System.out.println("*********该场景中还有其他人物：********");
+        System.out.println("*********该场景中还有其他实体：********");
         System.out.println("++++++++++++++++++++++++++++++++++++");
         System.out.println("++++++++++++++++++++++++++++++++++++");
-        System.out.println("+++\t\t昵称\t\t\t"+"生存状态 \t\t ++++");
-        for (Player p:
-                scence.getPlayers()) {
+        System.out.println("+++\t\t玩家名\t\t\t"+"生存状态 \t\t ++++");
+        for(Map.Entry<String, Player> entry: scence.getPlayers().entrySet())
+        {   Player p = entry.getValue();
             System.out.println("+++\t\t"+p.getName()+"\t\t\t"+(p.isStatus()==1?"生存":"死亡")+"    \t\t ++++");
+            System.out.println("Key: "+ entry.getKey()+ " Value: "+entry.getValue());
+        }
+        System.out.println("++++++++++++++++++++++++++++++++++++");
+        System.out.println("++++++++++++++++++++++++++++++++++++");
+        System.out.println("+++\t\tnpcID\t\t\t"+" npcName\t\t ++++");
+        for(Map.Entry<Integer, NPC> entry: scence.getNpcs().entrySet())
+        {   NPC p = entry.getValue();
+            System.out.println("+++\t\t"+p.getNpcId()+"\t\t\t"+p.getNpcName()+"    \t\t ++++");
+        }
+        System.out.println("++++++++++++++++++++++++++++++++++++");
+        System.out.println("++++++++++++++++++++++++++++++++++++");
+        System.out.println("+++\t\tmonsterID\t\t\t"+" monsterName\t\t ++++"+"生存状态 \t\t ++++"+"\t\t"+"monsterBlood");
+        for(Map.Entry<Integer, Monster> entry: scence.getMonsters().entrySet())
+        {   Monster p = entry.getValue();
+            System.out.println("+++\t\t"+p.getMonsterId()+"\t\t\t"+p.getMonsterName()+"    \t\t ++++"+(p.isStatus()==true?"生存":"死亡")+"\t\t"+p.getMonsterBlood());
         }
         System.out.println("++++++++++++++++++++++++++++++++++++");
         System.out.println("++++++++++++++++++++++++++++++++++++");

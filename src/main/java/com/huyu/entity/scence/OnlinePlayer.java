@@ -2,11 +2,10 @@ package com.huyu.entity.scence;
 
 import com.huyu.entity.Player;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OnlinePlayer {
-    private HashMap<String,Player> players = new HashMap<>();
+    private HashMap<String, Player> players = new HashMap<>();
     private static OnlinePlayer onlinePlayer ;
     private OnlinePlayer() {
     }

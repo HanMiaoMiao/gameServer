@@ -1,24 +1,52 @@
 package com.huyu.entity;
 
-import com.huyu.entity.scence.Begin;
+import com.huyu.entity.prop.Prop;
 import com.huyu.entity.scence.Scence;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.HashMap;
 
 public class Player implements Serializable {
+    //玩家当前场景
     private static final long  SerialVersionUID = 1L;
     private Integer playerId;
     private String playerName;
-    /**
-     * 玩家当前场景
-     */
     private Scence currentlyScene;
-    /**
-     * 生存状态
-     */
-    private int  status = 1;
+    private int status = 1;
     private String password;
+    /**
+     * 背包
+     */
+    private HashMap<Integer, Prop> backpack;
+    /**
+     * 装备栏
+     */
+    private HashMap<Integer, Prop> equipment;
+    /**
+     * 技能
+     */
+    private HashMap<Integer, Skill> skills;
+    /**
+     *魔法
+     */
+    private MP playerMp ;
+    /**
+     * 血量
+     */
+    private HP playerHP;
+    /**
+     * 角色攻击属性
+     */
+    private int attack;
+    /**
+     * 角色伤害
+     */
+    private int playerHarm;
+    /**
+     * 药水叠加次数
+     */
+    private int overlappingTimes;
+
 
     public Scence getCurrentlyScene() {
         return currentlyScene;
@@ -48,6 +76,7 @@ public class Player implements Serializable {
         this.currentlyScene = currentlyScene;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if(o instanceof Player){
@@ -59,5 +88,93 @@ public class Player implements Serializable {
             }
         }
         return false;
+    }
+
+    public HashMap<Integer, Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(HashMap<Integer, Skill> skills) {
+        this.skills = skills;
+    }
+
+    public MP getPlayerMp() {
+        return playerMp;
+    }
+
+    public void setPlayerMp(MP playerMp) {
+        this.playerMp = playerMp;
+    }
+
+    public int getPlayerHarm() {
+        return playerHarm;
+    }
+
+    public void setPlayerHarm(int playerHarm) {
+        this.playerHarm = playerHarm;
+    }
+
+    public Integer getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(Integer playerId) {
+        this.playerId = playerId;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public HashMap<Integer, Prop> getBackpack() {
+        return backpack;
+    }
+
+    public void setBackpack(HashMap<Integer, Prop> backpack) {
+        this.backpack = backpack;
+    }
+
+    public HashMap<Integer, Prop> getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(HashMap<Integer, Prop> equipment) {
+        this.equipment = equipment;
+    }
+
+    public int getOverlappingTimes() {
+        return overlappingTimes;
+    }
+
+    public void setOverlappingTimes(int overlappingTimes) {
+        this.overlappingTimes = overlappingTimes;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public HP getPlayerHP() {
+        return playerHP;
+    }
+
+    public void setPlayerHP(HP playerHP) {
+        this.playerHP = playerHP;
     }
 }
