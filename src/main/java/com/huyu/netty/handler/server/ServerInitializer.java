@@ -6,6 +6,8 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
 
 public class ServerInitializer extends ChannelInitializer<SocketChannel> {
      public static ApplicationContext CONTEXT = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -13,6 +15,8 @@ public class ServerInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
+        System.out.println("ServerInitializer:"+CONTEXT);
+        System.out.println(new ClassPathXmlApplicationContext("applicationContext.xml"));
         //加载spring容器
         LoginHandler loginHandler = (LoginHandler)CONTEXT.getBean("loginHandler") ;
         RegisterHandler registerHandler =(RegisterHandler) CONTEXT.getBean("registerHandler");

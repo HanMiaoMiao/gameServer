@@ -23,6 +23,7 @@ public class AttackCommand extends Command {
      */
     @Override
     public MessageProtocol serverExcute() {
+        System.out.println("attack");
         MessageProtocol mg;
         String resp;
         Player player = super.getMap().get(super.getPlayerName());
@@ -30,6 +31,7 @@ public class AttackCommand extends Command {
         //从消息中获取要攻击的怪物
         Monster monster = player.getCurrentlyScene().getMonsters().get(Integer.parseInt(str[0]));
         //从消息中获取要使用的技能
+        System.out.println("Skill"+player.getSkills());
         Skill skill = player.getSkills().get(Integer.parseInt(str[1]));
         //得到怪物的生命值
         int monsterblood = monster.getMonsterBlood();
@@ -62,13 +64,12 @@ public class AttackCommand extends Command {
                 //设置角色剩余mp
                 player.getPlayerMp().setCurrentmp(playerMp - skillMp);
                 //开启线程，让玩家mp自动恢复
-                Thread thread = new Thread(player.getPlayerMp());
-                thread.start();
+                if(player.getPlayerMp().getCurrentmp()<(player.getPlayerMp().getMaxMp()/2)){
+                    Thread thread = new Thread(player.getPlayerMp());
+                    thread.start();
+                }
                 //设置装备耐久度
-
-
-
-                resp = monster.toString();
+                resp = monster.toString()+"\n"+player.toString();
                 return new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
             }else{
                 resp= "技能CD未到，现在不能使用该技能";

@@ -38,6 +38,7 @@ public class CommandFactory {
 
         }
         if(split.length==2){
+            System.out.println(split[0]+"   "+split[1]);
             switch (split[0]){
                 case "move":{
                     command = new MoveCommand(playerName);
@@ -74,12 +75,13 @@ public class CommandFactory {
                 }
             }
         }
-        if(split.length==3){
+        if(split.length==4){
+            System.out.println(split[0]+"   "+split[1]+"   "+split[3]);
             switch (split[0]){
                 case "speak":{
                     command = new SpeakCommand(playerName);
                     command.setCommandName("speak");
-                    String[] str = {split[1],split[2]};
+                    String[] str = {split[1],split[3]};
                     command.setOption(str);
                     command.setCommandSign(CommandSign.SPEAK);
                     return command;
@@ -87,7 +89,7 @@ public class CommandFactory {
                 case "attack":{
                     command = new AttackCommand(playerName);
                     command.setCommandName("attack");
-                    String[] str = {split[1],split[2]};
+                    String[] str = {split[1],split[3]};
                     command.setOption(str);
                     command.setCommandSign(CommandSign.ATTACK);
                     return command;

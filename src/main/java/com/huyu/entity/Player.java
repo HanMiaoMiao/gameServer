@@ -45,7 +45,7 @@ public class Player implements Serializable {
     /**
      * 药水叠加次数
      */
-    private int overlappingTimes;
+    private int overlappingTimes=0;
 
 
     public Scence getCurrentlyScene() {
@@ -176,5 +176,16 @@ public class Player implements Serializable {
 
     public void setPlayerHP(HP playerHP) {
         this.playerHP = playerHP;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerName='" + playerName + '\'' +
+                ", currentlyScene=" + currentlyScene.getSceneName() +
+                ", playerMp=" + playerMp.getCurrentmp() +
+                ", playerHP=" + playerHP.getCurrentHP() +
+                ", 叠加药水的次数=" + overlappingTimes +
+                '}';
     }
 }

@@ -13,7 +13,7 @@ public class Scence implements Serializable {
     private static Integer sceneId;
     private String sceneName;
     private Map<String, Scence> borderScene;
-    private static HashMap<String, Player> players = new HashMap<>();
+    private HashMap<String, Player> players;
 
 
     private Map<Integer, NPC> npcs;
@@ -48,8 +48,8 @@ public class Scence implements Serializable {
         return players;
     }
 
-    public static void setPlayers(HashMap<String, Player> players) {
-        Scence.players = players;
+    public void setPlayers(HashMap<String, Player> players) {
+        this.players = players;
     }
 
     public Map<Integer, NPC> getNpcs() {
@@ -67,4 +67,5 @@ public class Scence implements Serializable {
     public void setMonsters(Map<Integer, Monster> monsters) {
         this.monsters = monsters;
     }
+
 }

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MoveCommand extends Command {
+
     public MoveCommand(String playerName){
         super(playerName);
     }
@@ -34,7 +35,9 @@ public class MoveCommand extends Command {
                 //将player加入到新场景
                 s.getValue().getPlayers().put(player.getName(),player);
                 player.setCurrentlyScene(s.getValue());
-                byte[] bytes = ConvertFunction.toByte(s);
+
+                byte[] bytes = ConvertFunction.toByte(player.getCurrentlyScene());
+                //byte[] bytes = ConvertFunction.toByte(s);
                 //将场景信息返回给客户端
                 messageProtocol = new MessageProtocol(bytes.length, Type.SCENCE,bytes);
                 return messageProtocol;

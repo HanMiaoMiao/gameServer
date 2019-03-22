@@ -20,8 +20,10 @@ public class AoiCommand extends Command {
         //由命令执行者得到Player对象
         Player player = map.get(super.getPlayerName());
         //从player中得到玩家当前所在的场景，再得到场景中的玩家
+        System.out.println(player.getCurrentlyScene().getPlayers().get("yi"));
+        System.out.println("aoi:"+player.getCurrentlyScene());
         byte[] bytes = ConvertFunction.toByte(player.getCurrentlyScene());
-        //
+        System.out.println(player.getCurrentlyScene());
         MessageProtocol messageProtocol = new MessageProtocol(bytes.length, Type.SCENCE,bytes);
         //System.out.println(messageProtocol);
         return messageProtocol;

@@ -18,6 +18,7 @@ public class ViewCommand extends Command {
      */
     @Override
     public MessageProtocol serverExcute() {
+        System.out.println("背包");
         Player player = super.getMap().get(super.getPlayerName());
         String[] str = super.getOption();
         byte[] bytes = null;

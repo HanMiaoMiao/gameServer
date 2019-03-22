@@ -28,7 +28,6 @@ public abstract class Command implements Serializable{
      */
     private String[] option;
 
-    private HashMap<String, Player> map = OnlinePlayer.getOnlinePlayer().getPlayers();
 
     public Command() {
     }
@@ -90,10 +89,9 @@ public abstract class Command implements Serializable{
     }
 
     public HashMap<String, Player> getMap() {
-        return map;
+
+        return OnlinePlayer.getOnlinePlayer().getPlayers();
     }
 
-    public void setMap(HashMap<String, Player> map) {
-        this.map = map;
-    }
+
 }

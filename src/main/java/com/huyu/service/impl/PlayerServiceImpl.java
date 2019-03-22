@@ -8,6 +8,7 @@ import com.huyu.entity.Skill;
 import com.huyu.entity.prop.Prop;
 import com.huyu.entity.scence.Scence;
 import com.huyu.entity.scence.World;
+
 import com.huyu.netty.handler.server.ServerInitializer;
 import com.huyu.service.PlayerService;
 import org.springframework.context.ApplicationContext;
@@ -24,16 +25,15 @@ import java.util.HashMap;
 public class PlayerServiceImpl implements PlayerService {
     @Resource(name = "playerDao")
     private PlayerDao playerDao;
-    @Resource(name = "scenes")
-    private World scence ;
-    private ApplicationContext context = ServerInitializer.CONTEXT;
+    //@Resource(name = "scenes")
+    //private World scence ;
     @Override
     //注册
     public boolean addPlayer(Player player) {
         if(playerDao.findByName(player.getName())==null){
             //给玩家设置场景信息，以及其他信息
             //设置初始信息
-            //System.out.println(playerDao.findByName(player.getName()));
+            System.out.println(playerDao.findByName(player.getName()));
             com.huyu.pojo.Player p = new com.huyu.pojo.Player();
 
             p.setPlayerName(player.getName());
@@ -41,7 +41,7 @@ public class PlayerServiceImpl implements PlayerService {
             p.setPassword(player.getPassword());
             //设置初始场景
             p.setCurrentlyScene("begin");
-            //设置背包ID
+
             playerDao.addPlayer(p);
             return true;
         }else{
@@ -72,9 +72,10 @@ public class PlayerServiceImpl implements PlayerService {
     @Override
     //login
     public boolean selectPlayer(Player player) {
+        ApplicationContext context = ServerInitializer.CONTEXT;
         com.huyu.pojo.Player p = playerDao.findByName(player.getName());
         //System.out.println(p);
-        HashMap<String, Scence> scences = (HashMap<String, Scence>) scence.getScences();
+
         if(p!=null) {
             player.setPlayerId(p.getPlayerId());
             //设置基础伤害
@@ -102,13 +103,23 @@ public class PlayerServiceImpl implements PlayerService {
             player.setEquipment(new HashMap<Integer, Prop>());
             HashMap<Integer, Skill> skills = new HashMap<>();
             //添加技能
+            System.out.println("PlayerServicelImpl:context"+ServerInitializer.CONTEXT);
+            //System.out.println("PlayerServicelImpl:context"+context);
+            //System.out.println("PlayerServiceImpl:skill"+skills);
             skills.put(1,(Skill)context.getBean(Integer.toString(1)));
             skills.put(2,(Skill)context.getBean(Integer.toString(2)));
+            player.setSkills(skills);
             //设置场景
-            Scence current = scences.get(p.getCurrentlyScene());
-            player.setCurrentlyScene(current);
+            Scence current = (Scence) context.getBean(p.getCurrentlyScene());
+            if(current.getPlayers()== null){
+                current.setPlayers(new HashMap<String, Player>());
+            }
+            System.out.println("current:"+current);
             //将玩家加入到世界中
+            player.setCurrentlyScene(current);
+            System.out.println("playerService"+current.getPlayers());
             current.getPlayers().put(p.getPlayerName(),player);
+            System.out.println("playerService"+current.getPlayers());
             return true;
         }else {
             //若未找到，返回错误信息

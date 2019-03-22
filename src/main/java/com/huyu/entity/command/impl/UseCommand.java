@@ -20,7 +20,7 @@ public class UseCommand extends Command {
         Player player = super.getMap().get(super.getPlayerName());
         String[] str = super.getOption();
         //从玩家背包中拿出道具
-        Prop prop = player.getBackpack().get(str[0]);
+        Prop prop = player.getBackpack().get(Integer.parseInt(str[0]));
         String msg = prop.effect(player);
         return new MessageProtocol(msg.getBytes().length, Type.STRING,msg.getBytes());
     }

@@ -31,4 +31,13 @@ public class NPC implements Serializable {
     public void setTalk(String talk) {
         this.talk = talk;
     }
+
+    @Override
+    public String toString() {
+        return "NPC{" +
+                "npcId=" + npcId +
+                ", npcName='" + npcName + '\'' +
+                ", talk='" + talk + '\'' +
+                '}';
+    }
 }

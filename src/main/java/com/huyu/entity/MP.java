@@ -18,7 +18,7 @@ public class MP implements Serializable,Runnable{
     /**
      * 每秒自动恢复的mp
      */
-    int mp = 100;
+    int mp = 10;
 
     /**
      * 自动恢复mp
@@ -43,5 +43,13 @@ public class MP implements Serializable,Runnable{
 
     public void setCurrentmp(int currentmp) {
         this.currentmp = currentmp;
+    }
+
+    public int getMaxMp() {
+        return maxMp;
+    }
+
+    public void setMaxMp(int maxMp) {
+        this.maxMp = maxMp;
     }
 }

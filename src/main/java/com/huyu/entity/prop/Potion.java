@@ -17,9 +17,11 @@ public class Potion extends Prop{
     @Override
     public String effect(Player player) {
         int currentMp = player.getPlayerMp().getCurrentmp();
+        int maxMP = player.getPlayerMp().getMaxMp();
         if(player.getOverlappingTimes()<= 100){
-            player.getPlayerMp().setCurrentmp((currentMp+mp));
-            player.setOverlappingTimes(player.getOverlappingTimes()-1);
+            currentMp = currentMp+mp;
+            player.getPlayerMp().setCurrentmp(currentMp> maxMP ? maxMP : currentMp);
+            player.setOverlappingTimes(player.getOverlappingTimes() + 1);
             player.getBackpack().remove(potionId);
             return "mp:"+ (currentMp+mp);
         }else{

@@ -10,7 +10,7 @@ public class OnlinePlayer {
     private OnlinePlayer() {
     }
     public static OnlinePlayer getOnlinePlayer(){
-        if( onlinePlayer== null){
+        if( onlinePlayer == null){
            onlinePlayer = new OnlinePlayer();
         }
         return onlinePlayer;

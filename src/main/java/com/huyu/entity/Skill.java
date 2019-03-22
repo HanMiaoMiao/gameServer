@@ -1,9 +1,12 @@
 package com.huyu.entity;
 
+import java.io.Serializable;
+
 /**
  * 技能
  */
-public class Skill{
+public class Skill implements Serializable {
+    private static final long  SerialVersionUID = 1L;
     /**
      * 技能ID
      */

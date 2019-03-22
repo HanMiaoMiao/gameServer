@@ -30,7 +30,7 @@ public class MessageDecoder extends ByteToMessageDecoder {
                 //markReaderIndex() 标记读（写）索引
                 byteBuf.markReaderIndex();
                 //readInt()　返回当前索引的(无符号) 整型，读索引加4
-                if(byteBuf.readInt() == ConstantValue.HEAD_DATA){
+                 if(byteBuf.readInt() == ConstantValue.HEAD_DATA){
                     break;
                 }
                 //未读到包头，略过一个字节

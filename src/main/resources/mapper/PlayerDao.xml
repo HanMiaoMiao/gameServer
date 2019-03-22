@@ -21,7 +21,7 @@
         select prop_id from backpack where player_id = #{backpackId}
     </select>
     <insert id="addPlayer" parameterType ="com.huyu.pojo.Player" useGeneratedKeys="true" keyProperty="playerId">
-        insert into player(player_id,player_name, password, currently_scene, status,backpack_id) values (#{playerId},#{playerName},#{password},#{currentlyScene},#{status},#{backpackID})
+        insert into player(player_id,player_name, password, currently_scene, status) values (#{playerId},#{playerName},#{password},#{currentlyScene},#{status})
     </insert>
 
     <update id="updatePlayer" parameterType="com.huyu.pojo.Player">
