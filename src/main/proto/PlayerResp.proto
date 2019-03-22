@@ -1,0 +1,11 @@
+syntax = "proto3";
+option java_package = "com.huyu.protobuf";
+//源文件类名
+option java_outer_classname = "PlayerRespProto";
+import "ScenceResp.proto";
+message PlayerResp{
+    int32 player_id =1;
+    string player_name = 2;
+    ScenceResp scence = 3;
+    int32 status = 4;
+}

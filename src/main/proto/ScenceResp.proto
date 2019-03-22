@@ -1,0 +1,16 @@
+syntax = "proto3";
+option java_package = "com.huyu.protobuf";
+//源文件类名
+option java_outer_classname = "ScenceRespProto";
+import "MonsterResp.proto";
+import "PlayerResp.proto";
+import "NPCResp.proto";
+message ScenceResp{
+    int32 scene_id = 1;//场景ID
+    string scene_name = 2;//场景名称
+    map<string,ScenceResp> border_scene = 3;//相邻的场景
+    map<string,PlayerResp> players = 4 ;//场景中的玩家
+    map<int32,NPCResp> npcs = 5;//场景中的npc
+    map<int32,MonsterResp> monsters = 6;//场景中的怪物
+
+}

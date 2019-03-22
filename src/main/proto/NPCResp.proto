@@ -1,0 +1,9 @@
+syntax = "proto3";
+option java_package = "com.huyu.protobuf";
+//源文件类名
+option java_outer_classname = "NPCRespProto";
+message NPCResp{
+    int32 npc_id = 1;
+    string npc_name = 2;
+    string talk = 3;
+}

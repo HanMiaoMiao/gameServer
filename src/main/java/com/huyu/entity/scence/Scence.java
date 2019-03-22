@@ -10,14 +10,29 @@ import java.util.Map;
 
 public class Scence implements Serializable {
     private static final long SerialVersionUID = 1L;
+    /**
+     * 场景ID
+     */
     private static Integer sceneId;
+    /**
+     * 场景名称
+     */
     private String sceneName;
+    /**
+     * 相邻的场景
+     */
     private Map<String, Scence> borderScene;
+    /**
+     * 场景中的玩家
+     */
     private HashMap<String, Player> players;
-
-
+    /**
+     * 场景中的npc
+     */
     private Map<Integer, NPC> npcs;
-    //怪物
+    /**
+     * 场景中的怪物
+     */
     private Map<Integer, Monster> monsters;
 
     public static Integer getSceneId() {
