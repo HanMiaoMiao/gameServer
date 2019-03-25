@@ -1,0 +1,9 @@
+syntax = "proto3";
+option java_package = "com.huyu.protobuf";
+//源文件类名
+option java_outer_classname = "PlayerReqProto";
+
+message PlayerReq{
+    string player_name = 2;
+    string psw = 3;
+}

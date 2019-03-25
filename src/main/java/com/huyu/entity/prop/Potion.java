@@ -35,6 +35,7 @@ public class Potion extends Prop{
 
     public void setPotionId(int potionId) {
         this.potionId = potionId;
+        super.setId(potionId);
     }
 
     public int getMp() {
@@ -43,6 +44,7 @@ public class Potion extends Prop{
 
     public void setMp(int mp) {
         this.mp = mp;
+
     }
 
     public String getName() {
@@ -51,6 +53,7 @@ public class Potion extends Prop{
 
     public void setName(String name) {
         this.name = name;
+        super.setPropName(name);
     }
 
     public byte getType() {

@@ -6,6 +6,7 @@ import com.huyu.entity.Skill;
 import com.huyu.entity.command.Command;
 import com.huyu.netty.protocol.MessageProtocol;
 import com.huyu.netty.protocol.Type;
+import com.huyu.protobuf.MessageProto;
 
 /**
  * 攻击命令
@@ -22,7 +23,7 @@ public class AttackCommand extends Command {
      * @return
      */
     @Override
-    public MessageProtocol serverExcute() {
+    public MessageProto.Message serverExcute() {
         System.out.println("attack");
         MessageProtocol mg;
         String resp;
@@ -37,7 +38,8 @@ public class AttackCommand extends Command {
         int monsterblood = monster.getMonsterBlood();
         if(monsterblood < 0){
             resp = "怪物已经死亡";
-            return new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
+            //return new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
+            return null;
         }
         //获得玩家剩余的mp
         int playerMp = player.getPlayerMp().getCurrentmp();
@@ -55,7 +57,8 @@ public class AttackCommand extends Command {
                 if(playerHp < 0){
                     player.setStatus(0);
                     resp = "你已经死亡";
-                    return new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
+                    //return new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
+                    return null;
                 }
                 monster.setMonsterBlood(monsterblood-skill.getHarm()-player.getPlayerHarm());
                 player.getPlayerHP().setCurrentHP(playerHp-monster.getHarm());
@@ -70,15 +73,18 @@ public class AttackCommand extends Command {
                 }
                 //设置装备耐久度
                 resp = monster.toString()+"\n"+player.toString();
-                return new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
+                //return new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
+                return null;
             }else{
                 resp= "技能CD未到，现在不能使用该技能";
                 mg = new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
-                return mg;
+                //return mg;
+                return null;
             }
         }else{
             resp = "mp不足，不能使用技能";
-            return new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
+            //return new MessageProtocol(resp.getBytes().length, Type.STRING,resp.getBytes());
+            return null;
         }
     }
 }

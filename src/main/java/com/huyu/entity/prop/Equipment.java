@@ -40,11 +40,13 @@ public class Equipment extends Prop {
     }
 
     public int getEquipmentId() {
+
         return equipmentId;
     }
 
     public void setEquipmentId(int equipmentId) {
         this.equipmentId = equipmentId;
+        super.setId(equipmentId);
     }
 
     public String getEquipmentName() {
@@ -53,6 +55,7 @@ public class Equipment extends Prop {
 
     public void setEquipmentName(String equipmentName) {
         this.equipmentName = equipmentName;
+        super.setPropName(equipmentName);
     }
 
     public boolean isWear() {

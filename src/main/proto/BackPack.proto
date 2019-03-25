@@ -1,0 +1,13 @@
+syntax = "proto3";
+//包名
+option java_package = "com.huyu.protobuf";
+//源文件类名
+option java_outer_classname = "BackPackProto";
+message BackPack{
+    string backpack_id = 1;
+    repeated Prop prop = 4;
+}
+message Prop{
+    int32 prop_id = 1;
+    string prop_name = 2;
+}

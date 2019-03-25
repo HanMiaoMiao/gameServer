@@ -1,8 +1,13 @@
 package com.huyu.netty.handler.server;
 
+import com.google.protobuf.ProtocolStringList;
 import com.huyu.entity.command.Command;
+import com.huyu.entity.command.impl.*;
 import com.huyu.netty.protocol.MessageProtocol;
+import com.huyu.netty.protocol.MessageType;
 import com.huyu.netty.util.ConvertFunction;
+import com.huyu.protobuf.CommandReqProto;
+import com.huyu.protobuf.MessageProto;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
@@ -26,12 +31,38 @@ public class CommandHandler extends ChannelHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         logger.info("CommandHandler.channelRead()");
         System.out.println("CommandHandler.channelRead()");
-        MessageProtocol mg = (MessageProtocol)msg;
-        byte[] bytes = mg.getContent();
-        Command command = (Command) ConvertFunction.fromByte(bytes);
-        //多态执行不同的命令，得到命令返回值
-        MessageProtocol m = command.serverExcute();
-
+        MessageProto.Message mg = (MessageProto.Message)msg;
+        CommandReqProto.CommandReq commandReq = CommandReqProto.CommandReq.parseFrom(mg.getObj());
+        String[] str = (String[])commandReq.getOptionList().toArray();
+        Command cm =  null;
+        switch (mg.getTypeValue()) {
+            case MessageType.Move_Req: {
+                cm = new MoveCommand(commandReq.getPlayerName());
+                break;
+            }
+            case MessageType.Aoi_Req: {
+                cm = new AoiCommand(commandReq.getPlayerName());
+                break;
+            }
+            case MessageType.Attack_Req: {
+                cm = new AttackCommand(commandReq.getPlayerName());
+                break;
+            }
+            case MessageType.Speak_Req: {
+                cm = new SpeakCommand(commandReq.getPlayerName());
+                break;
+            }
+            case MessageType.Use_Req: {
+                cm = new UseCommand(commandReq.getPlayerName());
+                break;
+            }
+            case MessageType.View_Req: {
+                cm = new ViewCommand(commandReq.getPlayerName());
+                break;
+            }
+        }
+        cm.setOption(str);
+        MessageProto.Message m = cm.serverExcute();
         ctx.channel().writeAndFlush(m);
     }
 }

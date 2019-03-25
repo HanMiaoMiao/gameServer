@@ -1,16 +1,23 @@
 package com.huyu.entity.command;
 
+import com.google.protobuf.ByteString;
 import com.huyu.entity.Player;
 import com.huyu.entity.scence.OnlinePlayer;
 import com.huyu.netty.protocol.MessageProtocol;
-import com.huyu.netty.protocol.Signe;
+import com.huyu.netty.protocol.MessageType;
 import com.huyu.netty.util.ConvertFunction;
+import com.huyu.protobuf.CommandReqProto;
+import com.huyu.protobuf.MessageProto;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
-public abstract class Command implements Serializable{
+public class Command implements Serializable{
     private static final long  SerialVersionUID = 1L;
+    private int seq = 1;
     /**
      * 命令类型
      */
@@ -40,17 +47,17 @@ public abstract class Command implements Serializable{
      * 封装客户端的命令
      * @return
      */
-    public MessageProtocol excute() {
-        byte[] bc = ConvertFunction.toByte(this);
-        MessageProtocol messageProtocol = new MessageProtocol(bc.length, Signe.H3,bc);
-        return messageProtocol;
+    public MessageProto.Message excute() {
+        return req();
     }
 
     /**
      * 执行客户端的命令
      * @return
      */
-    public abstract MessageProtocol serverExcute() ;
+    public MessageProto.Message serverExcute(){
+        return null;
+    }
 
     public static long getSerialVersionUID() {
         return SerialVersionUID;
@@ -76,6 +83,14 @@ public abstract class Command implements Serializable{
         return commandSign;
     }
 
+    public int getSeq() {
+        return seq;
+    }
+
+    public void setSeq(int seq) {
+        this.seq = seq;
+    }
+
     public void setCommandSign(int commandSign) {
         this.commandSign = commandSign;
     }
@@ -93,5 +108,36 @@ public abstract class Command implements Serializable{
         return OnlinePlayer.getOnlinePlayer().getPlayers();
     }
 
+    public MessageProto.Message req(){
+        MessageProto.Message.Builder builder =  MessageProto.Message.newBuilder();
+        //设置消息序列号
+        builder.setSeq(seq++);
+        //ByteString.copyFrom() 将protobuf的 ByteString 转为 java byte[]
+        setObj(builder);
+
+        return builder.build();
+    }
+
+    /**
+     * 设置消息类型
+     * @param builder
+     */
+    public void setType(MessageProto.Message.Builder builder){
+        builder.setType(MessageProto.MSG.Command_Req);
+    }
+
+    /**
+     * 设置传输的对象
+     * @param builder1
+     */
+    public void setObj(MessageProto.Message.Builder builder1){
+        CommandReqProto.CommandReq.Builder builder = CommandReqProto.CommandReq.newBuilder();
+        builder.setCommandName(this.commandName);
+        builder.setPlayerName(this.playerName);
+        builder.setCommandSign(MessageType.Command_Req);
+        List<String> str = Arrays.asList(this.option);
+        builder.addAllOption(str);
+        builder1.setObj(builder.build().toByteString());
+    }
 
 }

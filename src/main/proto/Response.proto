@@ -1,0 +1,9 @@
+syntax = "proto3";
+//包名
+option java_package = "com.huyu.protobuf";
+//源文件类名
+option java_outer_classname = "ResponseProto";
+
+message Response{
+
+}

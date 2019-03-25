@@ -1,0 +1,33 @@
+syntax = "proto3";
+//包名
+option java_package = "com.huyu.protobuf";
+//源文件类名
+option java_outer_classname = "MessageProto";
+import "Request.proto";
+import "Response.proto";
+message Message{
+    MSG type = 1;
+    bytes obj = 2;
+    fixed32 seq = 3;
+}
+enum MSG{
+    Register_Req = 0x00000000;
+    Login_Req = 0x00000001;
+    Command_Req = 0x00000002;
+    Move_Req = 0x00000003;
+    Aoi_Req = 0x00000004;
+    Attack_Req = 0x00000005;
+    Speak_Req = 0x00000006;
+    Use_Req = 0x00000007;
+    View_Req = 0x00000008;
+
+
+    Login_Resp = 0x00001001;
+    Register_Resp = 0x00001002;
+    Move_Resp = 0x00001003;
+    Aoi_Resp = 0x00001004;
+    Attack_Resp = 0x00001005;
+    Speak_Resp = 0x00001006;
+    Use_Resp = 0x00001007;
+    View_Resp = 0x00001008;
+}

@@ -2,9 +2,16 @@ package com.huyu.entity.command.impl;
 
 import com.huyu.entity.Player;
 import com.huyu.entity.command.Command;
+import com.huyu.entity.prop.Prop;
 import com.huyu.netty.protocol.MessageProtocol;
 import com.huyu.netty.protocol.Type;
 import com.huyu.netty.util.ConvertFunction;
+import com.huyu.protobuf.BackPackProto;
+import com.huyu.protobuf.MessageProto;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class ViewCommand extends Command {
     public ViewCommand(String playerName) {
@@ -17,17 +24,29 @@ public class ViewCommand extends Command {
      * @return
      */
     @Override
-    public MessageProtocol serverExcute() {
+    public MessageProto.Message serverExcute() {
         System.out.println("背包");
         Player player = super.getMap().get(super.getPlayerName());
         String[] str = super.getOption();
         byte[] bytes = null;
+        MessageProto.Message.Builder builder = MessageProto.Message.newBuilder();
+        BackPackProto.BackPack.Builder builder1 = BackPackProto.BackPack.newBuilder();
+        builder1.setBackpackId(super.getPlayerName());
+        Set<Map.Entry<Integer,Prop>> set = null;
         if("背包".equals(str[0])){
-            bytes = ConvertFunction.toByte(player.getBackpack());
+            set = player.getBackpack().entrySet();
         }
         if("装备栏".equals(str[0])){
-            bytes = ConvertFunction.toByte(player.getEquipment());
+           set = player.getEquipment().entrySet();
         }
-        return new MessageProtocol(bytes.length, Type.PROP,bytes);
+        for (HashMap.Entry<Integer, Prop> p:set){
+            BackPackProto.Prop.Builder builder2 = BackPackProto.Prop.newBuilder();
+            builder2.setPropId(p.getValue().getId());
+            builder2.setPropName(p.getValue().getPropName());
+            builder1.addProp(builder2.build());
+        }
+        builder.setType(MessageProto.MSG.View_Resp);
+        builder.setObj(builder1.build().toByteString());
+        return builder.build();
     }
 }

@@ -3,12 +3,16 @@ package com.huyu.entity.command.impl;
 import com.huyu.entity.Player;
 import com.huyu.entity.command.Command;
 import com.huyu.netty.protocol.MessageProtocol;
-import com.huyu.netty.protocol.Signe;
+import com.huyu.netty.protocol.MessageType;
 import com.huyu.netty.util.ConvertFunction;
+import com.huyu.protobuf.CommandReqProto;
+import com.huyu.protobuf.MessageProto;
+import com.huyu.protobuf.PlayerReqProto;
 
 import java.util.Scanner;
 
 public class LoginCommand extends Command {
+    private String pwd;
     public LoginCommand() {
     }
 
@@ -16,23 +20,26 @@ public class LoginCommand extends Command {
         super(playerName);
     }
     @Override
-    public MessageProtocol excute() {
+    public MessageProto.Message excute() {
         Scanner sc = new Scanner(System.in);
         System.out.println("************************************");
         System.out.print("请输入昵称：");
         String name = sc.nextLine();
         System.out.print("请输入密码：");
-        String password = sc.nextLine();
-        Player player = new Player();
-        player.setName(name);
-        player.setPassword(password);
-        byte[] bytes = ConvertFunction.toByte(player);
-        MessageProtocol messageProtocol = new MessageProtocol(bytes.length, Signe.H2,bytes);
-        return messageProtocol;
+        pwd = sc.nextLine();
+        return super.req();
+    }
+    @Override
+    public void setType(MessageProto.Message.Builder builder){
+        builder.setType(MessageProto.MSG.Login_Req);
     }
 
+
     @Override
-    public MessageProtocol serverExcute() {
-        return null;
+    public void setObj(MessageProto.Message.Builder builder1) {
+        PlayerReqProto.PlayerReq.Builder builder = PlayerReqProto.PlayerReq.newBuilder();
+        builder.setPlayerName(super.getPlayerName());
+        builder.setPsw(pwd);
+        builder1.setObj(builder.build().toByteString());
     }
 }

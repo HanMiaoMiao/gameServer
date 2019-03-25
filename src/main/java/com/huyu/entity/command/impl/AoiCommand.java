@@ -6,6 +6,7 @@ import com.huyu.entity.scence.OnlinePlayer;
 import com.huyu.netty.protocol.MessageProtocol;
 import com.huyu.netty.protocol.Type;
 import com.huyu.netty.util.ConvertFunction;
+import com.huyu.protobuf.MessageProto;
 
 import java.util.HashMap;
 
@@ -15,7 +16,7 @@ public class AoiCommand extends Command {
     }
 
     @Override
-    public MessageProtocol serverExcute() {
+    public MessageProto.Message serverExcute() {
         HashMap<String, Player> map = OnlinePlayer.getOnlinePlayer().getPlayers();
         //由命令执行者得到Player对象
         Player player = map.get(super.getPlayerName());
@@ -26,6 +27,6 @@ public class AoiCommand extends Command {
         System.out.println(player.getCurrentlyScene());
         MessageProtocol messageProtocol = new MessageProtocol(bytes.length, Type.SCENCE,bytes);
         //System.out.println(messageProtocol);
-        return messageProtocol;
+        return null;
     }
 }

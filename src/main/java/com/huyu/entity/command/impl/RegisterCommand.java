@@ -3,12 +3,16 @@ package com.huyu.entity.command.impl;
 import com.huyu.entity.Player;
 import com.huyu.entity.command.Command;
 import com.huyu.netty.protocol.MessageProtocol;
-import com.huyu.netty.protocol.Signe;
+import com.huyu.netty.protocol.MessageType;
 import com.huyu.netty.util.ConvertFunction;
+import com.huyu.protobuf.CommandReqProto;
+import com.huyu.protobuf.MessageProto;
+import com.huyu.protobuf.PlayerReqProto;
 
 import java.util.Scanner;
 
 public class RegisterCommand extends Command {
+    private String pwd;
     public RegisterCommand() {
     }
 
@@ -17,7 +21,7 @@ public class RegisterCommand extends Command {
     }
 
     @Override
-    public MessageProtocol excute() {
+    public MessageProto.Message excute() {
         Scanner sc = new Scanner(System.in);
         System.out.println("************************************");
         System.out.println("*************进入注册界面*************");
@@ -36,16 +40,19 @@ public class RegisterCommand extends Command {
                 break;
             }
         }
-        Player player = new Player();
-        player.setName(name);
-        player.setPassword(password1);
-        byte[] bytes = ConvertFunction.toByte(player);
-        MessageProtocol messageProtocol = new MessageProtocol(bytes.length, Signe.H1,bytes);
-        return messageProtocol;
+        this.pwd = password1;
+        return super.req();
+    }
+    @Override
+    public void setType(MessageProto.Message.Builder builder){
+        builder.setType(MessageProto.MSG.Register_Req);
     }
 
     @Override
-    public MessageProtocol serverExcute() {
-        return null;
+    public void setObj(MessageProto.Message.Builder builder1) {
+        PlayerReqProto.PlayerReq.Builder builder = PlayerReqProto.PlayerReq.newBuilder();
+        builder.setPlayerName(super.getPlayerName());
+        builder.setPsw(pwd);
+        builder1.setObj(builder.build().toByteString());
     }
 }

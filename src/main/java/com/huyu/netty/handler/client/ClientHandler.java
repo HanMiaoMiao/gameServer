@@ -1,6 +1,7 @@
 package com.huyu.netty.handler.client;
 
 import com.huyu.netty.protocol.MessageProtocol;
+import com.huyu.protobuf.MessageProto;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
@@ -13,7 +14,7 @@ import java.util.concurrent.CountDownLatch;
 public class ClientHandler extends ChannelHandlerAdapter {
     final static Logger logger = LoggerFactory.getLogger(ClientHandler.class);
     private CountDownLatch lathc;
-    private MessageProtocol result;
+    private MessageProto.Message result;
 
     public ClientHandler(CountDownLatch lathc) {
         this.lathc = lathc;
@@ -29,7 +30,7 @@ public class ClientHandler extends ChannelHandlerAdapter {
         try{
             logger.info("ClientHandler.channelRead()");
             //System.out.println("ClientHandler.channelRead()");
-            result = (MessageProtocol) msg;
+            result = (MessageProto.Message) msg;
             lathc.countDown();
         }finally {
             ReferenceCountUtil.release(msg);
@@ -52,7 +53,7 @@ public class ClientHandler extends ChannelHandlerAdapter {
     public void resetLatch(CountDownLatch initLathc){
         this.lathc = initLathc;
     }
-    public MessageProtocol getResult() {
+    public MessageProto.Message getResult() {
         return result;
     }
 }
