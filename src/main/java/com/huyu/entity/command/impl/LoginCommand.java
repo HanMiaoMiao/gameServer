@@ -19,12 +19,17 @@ public class LoginCommand extends Command {
     public LoginCommand(String playerName){
         super(playerName);
     }
+
+    /**
+     * login请求
+     * @return
+     */
     @Override
     public MessageProto.Message excute() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("************************************");
+        System.out.println("****************************************************************************");
         System.out.print("请输入昵称：");
-        String name = sc.nextLine();
+        super.setPlayerName(sc.nextLine());
         System.out.print("请输入密码：");
         pwd = sc.nextLine();
         return super.req();
@@ -38,7 +43,7 @@ public class LoginCommand extends Command {
     @Override
     public void setObj(MessageProto.Message.Builder builder1) {
         PlayerReqProto.PlayerReq.Builder builder = PlayerReqProto.PlayerReq.newBuilder();
-        builder.setPlayerName(super.getPlayerName());
+        builder.setPlayerName(this.getPlayerName());
         builder.setPsw(pwd);
         builder1.setObj(builder.build().toByteString());
     }

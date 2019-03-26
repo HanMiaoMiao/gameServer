@@ -38,7 +38,6 @@ public class CommandFactory {
 
         }
         if(split.length==2){
-            System.out.println(split[0]+"   "+split[1]);
             switch (split[0]){
                 case "move":{
                     command = new MoveCommand(playerName);
@@ -76,7 +75,6 @@ public class CommandFactory {
             }
         }
         if(split.length==4){
-            System.out.println(split[0]+"   "+split[1]+"   "+split[3]);
             switch (split[0]){
                 case "speak":{
                     command = new SpeakCommand(playerName);

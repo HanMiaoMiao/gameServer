@@ -44,7 +44,7 @@ public class ClientMain {
             // 异步链接服务器 同步等待链接成功
 
             this.connect();
-            System.out.println("***********已连接到服务器*************");
+            System.out.println("********************************已连接到服务器********************************");
             //Channel channel = connect.sync().channel();
 
 
@@ -71,7 +71,7 @@ public class ClientMain {
 
         } finally {
             group.shutdownGracefully();
-            System.out.println("客户端优雅的释放了线程资源...");
+            System.out.println("*************************客户端优雅的释放了线程资源...*************************");
         }
 
     }

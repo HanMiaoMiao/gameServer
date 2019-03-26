@@ -8,4 +8,7 @@ message PlayerResp{
     string player_name = 2;
     int32 status = 3;
     string scence_name = 4;
+    int32 player_mp = 5;
+    int32 player_hp = 6;
+    int32 harm = 7;
 }

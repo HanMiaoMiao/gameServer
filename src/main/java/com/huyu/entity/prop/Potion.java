@@ -23,7 +23,7 @@ public class Potion extends Prop{
             player.getPlayerMp().setCurrentmp(currentMp> maxMP ? maxMP : currentMp);
             player.setOverlappingTimes(player.getOverlappingTimes() + 1);
             player.getBackpack().remove(potionId);
-            return "mp:"+ (currentMp+mp);
+            return "现在的魔力值:"+ (player.getPlayerMp().getCurrentmp());
         }else{
             return "药水使用次数已超过100次";
         }

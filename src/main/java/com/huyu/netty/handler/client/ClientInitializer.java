@@ -35,7 +35,7 @@ public class ClientInitializer extends ChannelInitializer<SocketChannel> {
                 //.addLast("stringHandler",new StringHandler())
                 //.addLast("moveHandler",new MoveHandler());
     }
-    public MessageProtocol getServerResult(){
+    public MessageProto.Message getServerResult(){
         return clientHandler.getResult();
     }
     //重置同步锁

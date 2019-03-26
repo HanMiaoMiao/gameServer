@@ -4,6 +4,6 @@ option java_package = "com.huyu.protobuf";
 option java_outer_classname = "PlayerReqProto";
 
 message PlayerReq{
-    string player_name = 2;
-    string psw = 3;
+    string player_name = 1;
+    string psw = 2;
 }

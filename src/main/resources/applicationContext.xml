@@ -136,6 +136,9 @@
            <entry key="10001" value-ref="10001"/>
         </map>
      </property>
+     <property name="players" >
+        <map key-type="java.lang.String" value-type="com.huyu.entity.Player"/>
+     </property>
   </bean>
    <bean id = "village" class = "com.huyu.entity.scence.Scence">
       <property name="sceneName" value = "村子"/>
@@ -156,6 +159,9 @@
          <map>
             <entry key="10002" value-ref="10002"/>
          </map>
+      </property>
+      <property name="players" >
+         <map key-type="java.lang.String" value-type="com.huyu.entity.Player"/>
       </property>
    </bean>
    <bean id = "forest" class = "com.huyu.entity.scence.Scence">
@@ -178,6 +184,9 @@
             <entry key="10003" value-ref="10003"/>
          </map>
       </property>
+      <property name="players" >
+         <map key-type="java.lang.String" value-type="com.huyu.entity.Player"/>
+      </property>
    </bean>
    <bean id = "burg" class = "com.huyu.entity.scence.Scence">
       <property name="sceneName" value = "城堡"/>
@@ -187,6 +196,9 @@
                <ref bean="village"/>
             </entry>
          </map>
+      </property>
+      <property name="players" >
+         <map key-type="java.lang.String" value-type="com.huyu.entity.Player"/>
       </property>
       <property name="npcs">
          <map>
@@ -229,6 +241,7 @@
    <bean id="301" class="com.huyu.entity.prop.Potion" scope="prototype">
       <property name="potionId" value="301"/>
       <property name="mp" value="300"/>
+      <property name="name" value="药水"/>
    </bean>
    <!--装备-->
    <bean id="401" class="com.huyu.entity.prop.Equipment" scope="prototype">

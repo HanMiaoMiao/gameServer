@@ -23,10 +23,10 @@ public class RegisterCommand extends Command {
     @Override
     public MessageProto.Message excute() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("************************************");
-        System.out.println("*************进入注册界面*************");
+        System.out.println("****************************************************************************");
+        System.out.println("*********************************进入注册界面*********************************");
         System.out.print("请输入昵称：");
-        String name = sc.nextLine();
+        super.setPlayerName(sc.nextLine());
         String password1;
         while (true){
             System.out.print("请输入密码：");
@@ -34,8 +34,8 @@ public class RegisterCommand extends Command {
             System.out.print("请重新输入密码：");
             String password2 = sc.nextLine();
             if(password1.equals(password2)==false){
-                System.out.println("************************************");
-                System.out.println("**两次密码输入不一致，请重新输入！！！**");
+                System.out.println("****************************************************************************");
+                System.out.println("*************************两次密码输入不一致，请重新输入*************************");
             }else{
                 break;
             }

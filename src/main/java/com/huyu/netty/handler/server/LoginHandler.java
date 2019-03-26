@@ -45,10 +45,13 @@ public class LoginHandler extends ChannelHandlerAdapter {
         //游戏在线玩家
         OnlinePlayer onlinePlayer = OnlinePlayer.getOnlinePlayer();
         HashMap<String,Player> map = onlinePlayer.getPlayers();
+        System.out.println("Login"+mg.getTypeValue()+"   "+ MessageType.Login_Req);
         //验证是否是登录请求
         if(mg.getTypeValue() == MessageType.Login_Req){
             Player player = new Player();
             PlayerReqProto.PlayerReq playerReq = PlayerReqProto.PlayerReq.parseFrom(mg.getObj());
+            System.out.println(playerReq.getPlayerName());
+            System.out.println(playerReq.getPsw());
             player.setName(playerReq.getPlayerName());
             player.setPassword(playerReq.getPsw());
             String inform = null;
@@ -56,29 +59,32 @@ public class LoginHandler extends ChannelHandlerAdapter {
             if(playerService.selectPlayer(player)){
                 //加入到在线玩家中
                 map.put(player.getName(),player);
-                inform = "     登陆成功，你已经进入游戏了！";
+                inform = "***************************登陆成功，你已经进入游戏了***************************";
                 
             }else{
-                inform = "  登陆失败，用户名不存在或者密码错误！";
+                inform = "***********************登陆失败，用户名不存在或者密码错误***********************";
             }
+            System.out.println("return");
             //返回给客户端消息
             MessageProto.Message.Builder builder1 = MessageProto.Message.newBuilder();
             builder1.setSeq(mg.getSeq()+1);
-            builder1.setType(MessageProto.MSG.Register_Resp);
-            builder1.setObj(ByteString.copyFromUtf8(inform));
+            builder1.setType(MessageProto.MSG.Login_Resp);
+            builder1.setObj(ByteString.copyFrom(inform.getBytes()));
             ctx.writeAndFlush(builder1.build());
         }else{
-            CommandReqProto.CommandReq.Builder builder = CommandReqProto.CommandReq.newBuilder();
-            if(map.containsKey(builder.getCommandName())){
+
+            CommandReqProto.CommandReq commandReq= CommandReqProto.CommandReq.parseFrom(mg.getObj());
+            System.out.println("else " +commandReq.getPlayerName());
+            if(map.containsKey(commandReq.getPlayerName())){
                 //若已经登录，交给后面的handler处理
                 ctx.fireChannelRead(msg);
             }else {
                 //若没有登录，返回给客户端未登录信息
-                String inform = "用户未登陆";
+                String inform =    "*******************************用户未登陆************************************";
                 MessageProto.Message.Builder builder1 = MessageProto.Message.newBuilder();
                 builder1.setSeq(mg.getSeq()+1);
-                builder1.setType(MessageProto.MSG.Register_Resp);
-                builder1.setObj(ByteString.copyFromUtf8(inform));
+                builder1.setType(MessageProto.MSG.Login_Resp);
+                builder1.setObj(ByteString.copyFrom(inform.getBytes()));
                 ctx.writeAndFlush(builder1.build());
             }
         }

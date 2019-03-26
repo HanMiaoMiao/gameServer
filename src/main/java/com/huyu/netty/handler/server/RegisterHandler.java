@@ -38,6 +38,7 @@ public class RegisterHandler  extends ChannelHandlerAdapter {
         //System.out.println(mg.getSign());
         //System.out.println(Signe.H1);
         //验证是否是注册请求
+        System.out.println("Register"+mg.getTypeValue()+"   "+ MessageType.Register_Req);
         if(mg.getTypeValue()== MessageType.Register_Req){
             //在service设置玩家的信息
             Player player = new Player();

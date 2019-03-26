@@ -114,7 +114,7 @@ public class Command implements Serializable{
         builder.setSeq(seq++);
         //ByteString.copyFrom() 将protobuf的 ByteString 转为 java byte[]
         setObj(builder);
-
+        setType(builder);
         return builder.build();
     }
 
@@ -133,10 +133,14 @@ public class Command implements Serializable{
     public void setObj(MessageProto.Message.Builder builder1){
         CommandReqProto.CommandReq.Builder builder = CommandReqProto.CommandReq.newBuilder();
         builder.setCommandName(this.commandName);
-        builder.setPlayerName(this.playerName);
+        if(this.playerName!=null){
+            builder.setPlayerName(this.playerName);
+        }
         builder.setCommandSign(MessageType.Command_Req);
-        List<String> str = Arrays.asList(this.option);
-        builder.addAllOption(str);
+        if (this.option!=null){
+            List<String> str = Arrays.asList(this.option);
+            builder.addAllOption(str);
+        }
         builder1.setObj(builder.build().toByteString());
     }
 

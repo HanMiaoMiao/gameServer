@@ -11,6 +11,7 @@ public class MP implements Serializable,Runnable{
      * 最大的mp
      */
     int maxMp = 1000;
+    int minMp = 500;
     /**
      * 当前的mp
      */
@@ -26,7 +27,7 @@ public class MP implements Serializable,Runnable{
      */
     @Override
     public void run() {
-        while(currentmp <= maxMp){
+        while(currentmp <= 700){
             currentmp += mp;
             try {
                 Thread.sleep(1000);
@@ -34,7 +35,6 @@ public class MP implements Serializable,Runnable{
                 e.printStackTrace();
             }
         }
-        currentmp = maxMp;
     }
 
     public int getCurrentmp() {
@@ -51,5 +51,21 @@ public class MP implements Serializable,Runnable{
 
     public void setMaxMp(int maxMp) {
         this.maxMp = maxMp;
+    }
+
+    public int getMinMp() {
+        return minMp;
+    }
+
+    public void setMinMp(int minMp) {
+        this.minMp = minMp;
+    }
+
+    public int getMp() {
+        return mp;
+    }
+
+    public void setMp(int mp) {
+        this.mp = mp;
     }
 }

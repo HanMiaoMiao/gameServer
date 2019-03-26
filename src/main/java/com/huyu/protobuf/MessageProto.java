@@ -32,37 +32,61 @@ public final class MessageProto {
      */
     Command_Req(2),
     /**
-     * <code>Login_Resp = 3;</code>
+     * <code>Move_Req = 3;</code>
      */
-    Login_Resp(3),
+    Move_Req(3),
     /**
-     * <code>Register_Resp = 4;</code>
+     * <code>Aoi_Req = 4;</code>
      */
-    Register_Resp(4),
+    Aoi_Req(4),
     /**
-     * <code>Move_Resp = 5;</code>
+     * <code>Attack_Req = 5;</code>
      */
-    Move_Resp(5),
+    Attack_Req(5),
     /**
-     * <code>Aoi_Resp = 6;</code>
+     * <code>Speak_Req = 6;</code>
      */
-    Aoi_Resp(6),
+    Speak_Req(6),
     /**
-     * <code>Attack_Resp = 7;</code>
+     * <code>Use_Req = 7;</code>
      */
-    Attack_Resp(7),
+    Use_Req(7),
     /**
-     * <code>Speak_Resp = 8;</code>
+     * <code>View_Req = 8;</code>
      */
-    Speak_Resp(8),
+    View_Req(8),
     /**
-     * <code>Use_Resp = 9;</code>
+     * <code>Login_Resp = 4097;</code>
      */
-    Use_Resp(9),
+    Login_Resp(4097),
     /**
-     * <code>View_Resp = 10;</code>
+     * <code>Register_Resp = 4098;</code>
      */
-    View_Resp(10),
+    Register_Resp(4098),
+    /**
+     * <code>Move_Resp = 4099;</code>
+     */
+    Move_Resp(4099),
+    /**
+     * <code>Aoi_Resp = 4100;</code>
+     */
+    Aoi_Resp(4100),
+    /**
+     * <code>Attack_Resp = 4101;</code>
+     */
+    Attack_Resp(4101),
+    /**
+     * <code>Speak_Resp = 4102;</code>
+     */
+    Speak_Resp(4102),
+    /**
+     * <code>Use_Resp = 4103;</code>
+     */
+    Use_Resp(4103),
+    /**
+     * <code>View_Resp = 4104;</code>
+     */
+    View_Resp(4104),
     UNRECOGNIZED(-1),
     ;
 
@@ -79,37 +103,61 @@ public final class MessageProto {
      */
     public static final int Command_Req_VALUE = 2;
     /**
-     * <code>Login_Resp = 3;</code>
+     * <code>Move_Req = 3;</code>
      */
-    public static final int Login_Resp_VALUE = 3;
+    public static final int Move_Req_VALUE = 3;
     /**
-     * <code>Register_Resp = 4;</code>
+     * <code>Aoi_Req = 4;</code>
      */
-    public static final int Register_Resp_VALUE = 4;
+    public static final int Aoi_Req_VALUE = 4;
     /**
-     * <code>Move_Resp = 5;</code>
+     * <code>Attack_Req = 5;</code>
      */
-    public static final int Move_Resp_VALUE = 5;
+    public static final int Attack_Req_VALUE = 5;
     /**
-     * <code>Aoi_Resp = 6;</code>
+     * <code>Speak_Req = 6;</code>
      */
-    public static final int Aoi_Resp_VALUE = 6;
+    public static final int Speak_Req_VALUE = 6;
     /**
-     * <code>Attack_Resp = 7;</code>
+     * <code>Use_Req = 7;</code>
      */
-    public static final int Attack_Resp_VALUE = 7;
+    public static final int Use_Req_VALUE = 7;
     /**
-     * <code>Speak_Resp = 8;</code>
+     * <code>View_Req = 8;</code>
      */
-    public static final int Speak_Resp_VALUE = 8;
+    public static final int View_Req_VALUE = 8;
     /**
-     * <code>Use_Resp = 9;</code>
+     * <code>Login_Resp = 4097;</code>
      */
-    public static final int Use_Resp_VALUE = 9;
+    public static final int Login_Resp_VALUE = 4097;
     /**
-     * <code>View_Resp = 10;</code>
+     * <code>Register_Resp = 4098;</code>
      */
-    public static final int View_Resp_VALUE = 10;
+    public static final int Register_Resp_VALUE = 4098;
+    /**
+     * <code>Move_Resp = 4099;</code>
+     */
+    public static final int Move_Resp_VALUE = 4099;
+    /**
+     * <code>Aoi_Resp = 4100;</code>
+     */
+    public static final int Aoi_Resp_VALUE = 4100;
+    /**
+     * <code>Attack_Resp = 4101;</code>
+     */
+    public static final int Attack_Resp_VALUE = 4101;
+    /**
+     * <code>Speak_Resp = 4102;</code>
+     */
+    public static final int Speak_Resp_VALUE = 4102;
+    /**
+     * <code>Use_Resp = 4103;</code>
+     */
+    public static final int Use_Resp_VALUE = 4103;
+    /**
+     * <code>View_Resp = 4104;</code>
+     */
+    public static final int View_Resp_VALUE = 4104;
 
 
     public final int getNumber() {
@@ -133,14 +181,20 @@ public final class MessageProto {
         case 0: return Register_Req;
         case 1: return Login_Req;
         case 2: return Command_Req;
-        case 3: return Login_Resp;
-        case 4: return Register_Resp;
-        case 5: return Move_Resp;
-        case 6: return Aoi_Resp;
-        case 7: return Attack_Resp;
-        case 8: return Speak_Resp;
-        case 9: return Use_Resp;
-        case 10: return View_Resp;
+        case 3: return Move_Req;
+        case 4: return Aoi_Req;
+        case 5: return Attack_Req;
+        case 6: return Speak_Req;
+        case 7: return Use_Req;
+        case 8: return View_Req;
+        case 4097: return Login_Resp;
+        case 4098: return Register_Resp;
+        case 4099: return Move_Resp;
+        case 4100: return Aoi_Resp;
+        case 4101: return Attack_Resp;
+        case 4102: return Speak_Resp;
+        case 4103: return Use_Resp;
+        case 4104: return View_Resp;
         default: return null;
       }
     }
@@ -816,15 +870,16 @@ public final class MessageProto {
       descriptor;
   static {
     String[] descriptorData = {
-      "\n\rMessage.proto\032\rRequest.proto\032\016Response" +
-      ".proto\"7\n\007Message\022\022\n\004type\030\001 \001(\0162\004.MSG\022\013\n" +
-      "\003obj\030\002 \001(\014\022\013\n\003seq\030\003 \001(\007*\265\001\n\003MSG\022\020\n\014Regis" +
-      "ter_Req\020\000\022\r\n\tLogin_Req\020\001\022\017\n\013Command_Req\020" +
-      "\002\022\016\n\nLogin_Resp\020\003\022\021\n\rRegister_Resp\020\004\022\r\n\t" +
-      "Move_Resp\020\005\022\014\n\010Aoi_Resp\020\006\022\017\n\013Attack_Resp" +
-      "\020\007\022\016\n\nSpeak_Resp\020\010\022\014\n\010Use_Resp\020\t\022\r\n\tView" +
-      "_Resp\020\nB!\n\021com.huyu.protobufB\014MessagePro" +
-      "tob\006proto3"
+      "\n\rMessage.proto\"7\n\007Message\022\022\n\004type\030\001 \001(\016" +
+      "2\004.MSG\022\013\n\003obj\030\002 \001(\014\022\013\n\003seq\030\003 \001(\007*\222\002\n\003MSG" +
+      "\022\020\n\014Register_Req\020\000\022\r\n\tLogin_Req\020\001\022\017\n\013Com" +
+      "mand_Req\020\002\022\014\n\010Move_Req\020\003\022\013\n\007Aoi_Req\020\004\022\016\n" +
+      "\nAttack_Req\020\005\022\r\n\tSpeak_Req\020\006\022\013\n\007Use_Req\020" +
+      "\007\022\014\n\010View_Req\020\010\022\017\n\nLogin_Resp\020\201 \022\022\n\rRegi" +
+      "ster_Resp\020\202 \022\016\n\tMove_Resp\020\203 \022\r\n\010Aoi_Resp" +
+      "\020\204 \022\020\n\013Attack_Resp\020\205 \022\017\n\nSpeak_Resp\020\206 \022\r" +
+      "\n\010Use_Resp\020\207 \022\016\n\tView_Resp\020\210 B!\n\021com.huy" +
+      "u.protobufB\014MessageProtob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -837,8 +892,6 @@ public final class MessageProto {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          RequestProto.getDescriptor(),
-          ResponseProto.getDescriptor(),
         }, assigner);
     internal_static_Message_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -846,8 +899,6 @@ public final class MessageProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Message_descriptor,
         new String[] { "Type", "Obj", "Seq", });
-    RequestProto.getDescriptor();
-    ResponseProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

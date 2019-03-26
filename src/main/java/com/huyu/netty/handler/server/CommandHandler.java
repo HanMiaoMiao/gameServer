@@ -33,7 +33,11 @@ public class CommandHandler extends ChannelHandlerAdapter {
         System.out.println("CommandHandler.channelRead()");
         MessageProto.Message mg = (MessageProto.Message)msg;
         CommandReqProto.CommandReq commandReq = CommandReqProto.CommandReq.parseFrom(mg.getObj());
-        String[] str = (String[])commandReq.getOptionList().toArray();
+        String[] str = new String[commandReq.getOptionCount()];
+        for(int i = 0; i < str.length; i++){
+            str[i] = commandReq.getOption(i);
+            System.out.println(str[i]);
+        }
         Command cm =  null;
         switch (mg.getTypeValue()) {
             case MessageType.Move_Req: {

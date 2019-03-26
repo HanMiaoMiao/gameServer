@@ -19,6 +19,12 @@ public class MoveCommand extends Command {
     public MoveCommand(String playerName){
         super(playerName);
     }
+
+    @Override
+    public void setType(MessageProto.Message.Builder builder) {
+        builder.setType(MessageProto.MSG.Move_Req);
+    }
+
     @Override
     public MessageProto.Message serverExcute() {
         //在线玩家
@@ -35,6 +41,9 @@ public class MoveCommand extends Command {
                 //从当前场景中移除player
                 player.getCurrentlyScene().getPlayers().remove(player);
                 //将player加入到新场景
+                System.out.println("move+"+s.getValue());
+                System.out.println("move+"+s.getValue().getPlayers());
+                System.out.println(player.getName());
                 s.getValue().getPlayers().put(player.getName(),player);
                 player.setCurrentlyScene(s.getValue());
                 String inform = "你已到达"+s.getValue().getSceneName();

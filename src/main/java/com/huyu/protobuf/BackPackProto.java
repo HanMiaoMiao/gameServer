@@ -19,35 +19,40 @@ public final class BackPackProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string backpack_id = 1;</code>
+     * <code>int32 type = 1;</code>
+     */
+    int getType();
+
+    /**
+     * <code>string backpack_id = 2;</code>
      */
     String getBackpackId();
     /**
-     * <code>string backpack_id = 1;</code>
+     * <code>string backpack_id = 2;</code>
      */
     com.google.protobuf.ByteString
         getBackpackIdBytes();
 
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     java.util.List<Prop>
         getPropList();
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     BackPackProto.Prop getProp(int index);
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     int getPropCount();
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     java.util.List<? extends PropOrBuilder>
         getPropOrBuilderList();
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     BackPackProto.PropOrBuilder getPropOrBuilder(
             int index);
@@ -65,6 +70,7 @@ public final class BackPackProto {
       super(builder);
     }
     private BackPack() {
+      type_ = 0;
       backpackId_ = "";
       prop_ = java.util.Collections.emptyList();
     }
@@ -100,16 +106,21 @@ public final class BackPackProto {
               }
               break;
             }
-            case 10: {
+            case 8: {
+
+              type_ = input.readInt32();
+              break;
+            }
+            case 18: {
               String s = input.readStringRequireUtf8();
 
               backpackId_ = s;
               break;
             }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 prop_ = new java.util.ArrayList<Prop>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
               prop_.add(
                   input.readMessage(BackPackProto.Prop.parser(), extensionRegistry));
@@ -123,7 +134,7 @@ public final class BackPackProto {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           prop_ = java.util.Collections.unmodifiableList(prop_);
         }
         this.unknownFields = unknownFields.build();
@@ -143,10 +154,19 @@ public final class BackPackProto {
     }
 
     private int bitField0_;
-    public static final int BACKPACK_ID_FIELD_NUMBER = 1;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private int type_;
+    /**
+     * <code>int32 type = 1;</code>
+     */
+    public int getType() {
+      return type_;
+    }
+
+    public static final int BACKPACK_ID_FIELD_NUMBER = 2;
     private volatile Object backpackId_;
     /**
-     * <code>string backpack_id = 1;</code>
+     * <code>string backpack_id = 2;</code>
      */
     public String getBackpackId() {
       Object ref = backpackId_;
@@ -161,7 +181,7 @@ public final class BackPackProto {
       }
     }
     /**
-     * <code>string backpack_id = 1;</code>
+     * <code>string backpack_id = 2;</code>
      */
     public com.google.protobuf.ByteString
         getBackpackIdBytes() {
@@ -177,35 +197,35 @@ public final class BackPackProto {
       }
     }
 
-    public static final int PROP_FIELD_NUMBER = 4;
+    public static final int PROP_FIELD_NUMBER = 3;
     private java.util.List<Prop> prop_;
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     public java.util.List<Prop> getPropList() {
       return prop_;
     }
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     public java.util.List<? extends PropOrBuilder>
         getPropOrBuilderList() {
       return prop_;
     }
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     public int getPropCount() {
       return prop_.size();
     }
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     public BackPackProto.Prop getProp(int index) {
       return prop_.get(index);
     }
     /**
-     * <code>repeated .Prop prop = 4;</code>
+     * <code>repeated .Prop prop = 3;</code>
      */
     public BackPackProto.PropOrBuilder getPropOrBuilder(
         int index) {
@@ -224,11 +244,14 @@ public final class BackPackProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (type_ != 0) {
+        output.writeInt32(1, type_);
+      }
       if (!getBackpackIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, backpackId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, backpackId_);
       }
       for (int i = 0; i < prop_.size(); i++) {
-        output.writeMessage(4, prop_.get(i));
+        output.writeMessage(3, prop_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -238,12 +261,16 @@ public final class BackPackProto {
       if (size != -1) return size;
 
       size = 0;
+      if (type_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, type_);
+      }
       if (!getBackpackIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, backpackId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, backpackId_);
       }
       for (int i = 0; i < prop_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, prop_.get(i));
+          .computeMessageSize(3, prop_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -261,6 +288,8 @@ public final class BackPackProto {
       BackPackProto.BackPack other = (BackPackProto.BackPack) obj;
 
       boolean result = true;
+      result = result && (getType()
+          == other.getType());
       result = result && getBackpackId()
           .equals(other.getBackpackId());
       result = result && getPropList()
@@ -276,6 +305,8 @@ public final class BackPackProto {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getType();
       hash = (37 * hash) + BACKPACK_ID_FIELD_NUMBER;
       hash = (53 * hash) + getBackpackId().hashCode();
       if (getPropCount() > 0) {
@@ -412,11 +443,13 @@ public final class BackPackProto {
       }
       public Builder clear() {
         super.clear();
+        type_ = 0;
+
         backpackId_ = "";
 
         if (propBuilder_ == null) {
           prop_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           propBuilder_.clear();
         }
@@ -444,11 +477,12 @@ public final class BackPackProto {
         BackPackProto.BackPack result = new BackPackProto.BackPack(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
+        result.type_ = type_;
         result.backpackId_ = backpackId_;
         if (propBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
             prop_ = java.util.Collections.unmodifiableList(prop_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.prop_ = prop_;
         } else {
@@ -496,6 +530,9 @@ public final class BackPackProto {
 
       public Builder mergeFrom(BackPackProto.BackPack other) {
         if (other == BackPackProto.BackPack.getDefaultInstance()) return this;
+        if (other.getType() != 0) {
+          setType(other.getType());
+        }
         if (!other.getBackpackId().isEmpty()) {
           backpackId_ = other.backpackId_;
           onChanged();
@@ -504,7 +541,7 @@ public final class BackPackProto {
           if (!other.prop_.isEmpty()) {
             if (prop_.isEmpty()) {
               prop_ = other.prop_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensurePropIsMutable();
               prop_.addAll(other.prop_);
@@ -517,7 +554,7 @@ public final class BackPackProto {
               propBuilder_.dispose();
               propBuilder_ = null;
               prop_ = other.prop_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
               propBuilder_ =
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getPropFieldBuilder() : null;
@@ -554,9 +591,35 @@ public final class BackPackProto {
       }
       private int bitField0_;
 
+      private int type_ ;
+      /**
+       * <code>int32 type = 1;</code>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <code>int32 type = 1;</code>
+       */
+      public Builder setType(int value) {
+
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 type = 1;</code>
+       */
+      public Builder clearType() {
+
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+
       private Object backpackId_ = "";
       /**
-       * <code>string backpack_id = 1;</code>
+       * <code>string backpack_id = 2;</code>
        */
       public String getBackpackId() {
         Object ref = backpackId_;
@@ -571,7 +634,7 @@ public final class BackPackProto {
         }
       }
       /**
-       * <code>string backpack_id = 1;</code>
+       * <code>string backpack_id = 2;</code>
        */
       public com.google.protobuf.ByteString
           getBackpackIdBytes() {
@@ -587,7 +650,7 @@ public final class BackPackProto {
         }
       }
       /**
-       * <code>string backpack_id = 1;</code>
+       * <code>string backpack_id = 2;</code>
        */
       public Builder setBackpackId(
           String value) {
@@ -600,7 +663,7 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>string backpack_id = 1;</code>
+       * <code>string backpack_id = 2;</code>
        */
       public Builder clearBackpackId() {
 
@@ -609,7 +672,7 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>string backpack_id = 1;</code>
+       * <code>string backpack_id = 2;</code>
        */
       public Builder setBackpackIdBytes(
           com.google.protobuf.ByteString value) {
@@ -626,9 +689,9 @@ public final class BackPackProto {
       private java.util.List<Prop> prop_ =
         java.util.Collections.emptyList();
       private void ensurePropIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           prop_ = new java.util.ArrayList<Prop>(prop_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -636,7 +699,7 @@ public final class BackPackProto {
           Prop, Prop.Builder, PropOrBuilder> propBuilder_;
 
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public java.util.List<Prop> getPropList() {
         if (propBuilder_ == null) {
@@ -646,7 +709,7 @@ public final class BackPackProto {
         }
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public int getPropCount() {
         if (propBuilder_ == null) {
@@ -656,7 +719,7 @@ public final class BackPackProto {
         }
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public BackPackProto.Prop getProp(int index) {
         if (propBuilder_ == null) {
@@ -666,7 +729,7 @@ public final class BackPackProto {
         }
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public Builder setProp(
           int index, BackPackProto.Prop value) {
@@ -683,7 +746,7 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public Builder setProp(
           int index, BackPackProto.Prop.Builder builderForValue) {
@@ -697,7 +760,7 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public Builder addProp(BackPackProto.Prop value) {
         if (propBuilder_ == null) {
@@ -713,7 +776,7 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public Builder addProp(
           int index, BackPackProto.Prop value) {
@@ -730,7 +793,7 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public Builder addProp(
           BackPackProto.Prop.Builder builderForValue) {
@@ -744,7 +807,7 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public Builder addProp(
           int index, BackPackProto.Prop.Builder builderForValue) {
@@ -758,7 +821,7 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public Builder addAllProp(
           Iterable<? extends Prop> values) {
@@ -773,12 +836,12 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public Builder clearProp() {
         if (propBuilder_ == null) {
           prop_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           propBuilder_.clear();
@@ -786,7 +849,7 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public Builder removeProp(int index) {
         if (propBuilder_ == null) {
@@ -799,14 +862,14 @@ public final class BackPackProto {
         return this;
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public BackPackProto.Prop.Builder getPropBuilder(
           int index) {
         return getPropFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public BackPackProto.PropOrBuilder getPropOrBuilder(
           int index) {
@@ -816,7 +879,7 @@ public final class BackPackProto {
         }
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public java.util.List<? extends PropOrBuilder>
            getPropOrBuilderList() {
@@ -827,14 +890,14 @@ public final class BackPackProto {
         }
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public BackPackProto.Prop.Builder addPropBuilder() {
         return getPropFieldBuilder().addBuilder(
             BackPackProto.Prop.getDefaultInstance());
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public BackPackProto.Prop.Builder addPropBuilder(
           int index) {
@@ -842,7 +905,7 @@ public final class BackPackProto {
             index, BackPackProto.Prop.getDefaultInstance());
       }
       /**
-       * <code>repeated .Prop prop = 4;</code>
+       * <code>repeated .Prop prop = 3;</code>
        */
       public java.util.List<Prop.Builder>
            getPropBuilderList() {
@@ -855,7 +918,7 @@ public final class BackPackProto {
           propBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               Prop, Prop.Builder, PropOrBuilder>(
                   prop_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           prop_ = null;
@@ -1518,10 +1581,11 @@ public final class BackPackProto {
       descriptor;
   static {
     String[] descriptorData = {
-      "\n\016BackPack.proto\"4\n\010BackPack\022\023\n\013backpack" +
-      "_id\030\001 \001(\t\022\023\n\004prop\030\004 \003(\0132\005.Prop\"*\n\004Prop\022\017" +
-      "\n\007prop_id\030\001 \001(\005\022\021\n\tprop_name\030\002 \001(\tB\"\n\021co" +
-      "m.huyu.protobufB\rBackPackProtob\006proto3"
+      "\n\016BackPack.proto\"B\n\010BackPack\022\014\n\004type\030\001 \001" +
+      "(\005\022\023\n\013backpack_id\030\002 \001(\t\022\023\n\004prop\030\003 \003(\0132\005." +
+      "Prop\"*\n\004Prop\022\017\n\007prop_id\030\001 \001(\005\022\021\n\tprop_na" +
+      "me\030\002 \001(\tB\"\n\021com.huyu.protobufB\rBackPackP" +
+      "rotob\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1540,7 +1604,7 @@ public final class BackPackProto {
     internal_static_BackPack_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BackPack_descriptor,
-        new String[] { "BackpackId", "Prop", });
+        new String[] { "Type", "BackpackId", "Prop", });
     internal_static_Prop_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_Prop_fieldAccessorTable = new

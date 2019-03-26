@@ -17,6 +17,10 @@ public class ViewCommand extends Command {
     public ViewCommand(String playerName) {
         super(playerName);
     }
+    @Override
+    public void setType(MessageProto.Message.Builder builder) {
+        builder.setType(MessageProto.MSG.View_Req);
+    }
 
     /**
      * 查看背包中的物品
@@ -35,13 +39,17 @@ public class ViewCommand extends Command {
         Set<Map.Entry<Integer,Prop>> set = null;
         if("背包".equals(str[0])){
             set = player.getBackpack().entrySet();
+            builder1.setType(0);
         }
         if("装备栏".equals(str[0])){
            set = player.getEquipment().entrySet();
+            builder1.setType(1);
         }
         for (HashMap.Entry<Integer, Prop> p:set){
             BackPackProto.Prop.Builder builder2 = BackPackProto.Prop.newBuilder();
             builder2.setPropId(p.getValue().getId());
+            System.out.println("view" + p.getValue().getId());
+            System.out.println("view" + p.getValue().getPropName());
             builder2.setPropName(p.getValue().getPropName());
             builder1.addProp(builder2.build());
         }

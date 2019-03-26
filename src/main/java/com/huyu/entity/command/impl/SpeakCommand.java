@@ -1,5 +1,6 @@
 package com.huyu.entity.command.impl;
 
+import com.google.protobuf.ByteString;
 import com.huyu.entity.NPC;
 import com.huyu.entity.command.Command;
 import com.huyu.entity.scence.Scence;
@@ -14,13 +15,20 @@ public class SpeakCommand extends Command {
         super(playerName);
     }
     @Override
+    public void setType(MessageProto.Message.Builder builder) {
+        builder.setType(MessageProto.MSG.Speak_Req);
+    }
+
+    @Override
     public MessageProto.Message serverExcute() {
         String[] str = super.getOption();
         Scence s = super.getMap().get(super.getPlayerName()).getCurrentlyScene();
         HashMap<Integer, NPC> npcMap = (HashMap<Integer, NPC>) s.getNpcs();
         String talk = npcMap.get(Integer.parseInt(str[0])).getTalk();
-        MessageProtocol msg = new MessageProtocol(talk.getBytes().length, Type.STRING,talk.getBytes());
-        return null;
+        MessageProto.Message.Builder builder = MessageProto.Message.newBuilder();
+        builder.setType(MessageProto.MSG.Speak_Resp);
+        builder.setObj(ByteString.copyFromUtf8(talk));
+        return builder.build();
     }
 
 }

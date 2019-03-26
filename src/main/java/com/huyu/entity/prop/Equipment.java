@@ -35,8 +35,10 @@ public class Equipment extends Prop {
         //将装备放入装备栏
         player.getEquipment().put(equipmentId,this);
         //从背包移除
+
+        //退出登陆的时候从数据库中删除使用过的道具
         player.getBackpack().remove(equipmentId);
-        return "攻击属性"+ player.getAttack()+"伤害"+player.getPlayerHarm();
+        return "攻击属性:"+ player.getAttack()+"\n"+"伤害:"+player.getPlayerHarm();
     }
 
     public int getEquipmentId() {

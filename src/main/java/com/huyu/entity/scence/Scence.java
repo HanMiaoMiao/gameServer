@@ -13,7 +13,7 @@ public class Scence implements Serializable {
     /**
      * 场景ID
      */
-    private static Integer sceneId;
+    private Integer sceneId;
     /**
      * 场景名称
      */
@@ -25,7 +25,7 @@ public class Scence implements Serializable {
     /**
      * 场景中的玩家
      */
-    private HashMap<String, Player> players;
+    private Map<String, Player> players;
     /**
      * 场景中的npc
      */
@@ -35,12 +35,12 @@ public class Scence implements Serializable {
      */
     private Map<Integer, Monster> monsters;
 
-    public static Integer getSceneId() {
-        return sceneId;
+    public Integer getSceneId() {
+        return this.sceneId;
     }
 
-    public static void setSceneId(Integer sceneId) {
-        Scence.sceneId = sceneId;
+    public void setSceneId(Integer sceneId) {
+        this.sceneId = sceneId;
     }
 
     public String getSceneName() {
@@ -59,11 +59,11 @@ public class Scence implements Serializable {
         this.borderScene = borderScene;
     }
 
-    public HashMap<String, Player> getPlayers() {
+    public Map<String, Player> getPlayers() {
         return players;
     }
 
-    public void setPlayers(HashMap<String, Player> players) {
+    public void setPlayers(Map<String, Player> players) {
         this.players = players;
     }
 
