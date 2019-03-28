@@ -19,7 +19,7 @@ public class MP implements Serializable,Runnable{
     /**
      * 每秒自动恢复的mp
      */
-    int mp = 10;
+    int mp = 2;
 
     /**
      * 自动恢复mp

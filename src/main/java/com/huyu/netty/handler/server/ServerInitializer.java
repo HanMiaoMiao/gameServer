@@ -3,6 +3,7 @@ package com.huyu.netty.handler.server;
 import com.huyu.netty.decoder.MessageDecoder;
 import com.huyu.netty.encoder.MessageEncoder;
 import com.huyu.protobuf.MessageProto;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.handler.codec.protobuf.ProtobufDecoder;
@@ -13,7 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
-
+@ChannelHandler.Sharable
 public class ServerInitializer extends ChannelInitializer<SocketChannel> {
      public static ApplicationContext CONTEXT = new ClassPathXmlApplicationContext("applicationContext.xml");
 

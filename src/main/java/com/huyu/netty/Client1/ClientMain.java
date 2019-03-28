@@ -1,4 +1,4 @@
-package com.huyu.netty.client;
+package com.huyu.netty.Client1;
 
 
 import com.huyu.netty.handler.client.ClientInitializer;

@@ -8,6 +8,7 @@ import com.huyu.netty.protocol.MessageType;
 import com.huyu.netty.util.ConvertFunction;
 import com.huyu.protobuf.CommandReqProto;
 import com.huyu.protobuf.MessageProto;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 处理其它的命令
  */
+@ChannelHandler.Sharable
 public class CommandHandler extends ChannelHandlerAdapter {
     final static Logger logger = LoggerFactory.getLogger(CommandHandler.class);
 

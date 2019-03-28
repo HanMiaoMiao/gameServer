@@ -9,6 +9,7 @@ import com.huyu.netty.util.ConvertFunction;
 import com.huyu.protobuf.MessageProto;
 import com.huyu.protobuf.PlayerReqProto;
 import com.huyu.service.PlayerService;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import javax.annotation.Resource;
  * 处理注册请求
  */
 @Component("registerHandler")
+@ChannelHandler.Sharable
 public class RegisterHandler  extends ChannelHandlerAdapter {
     private final static Logger logger = LoggerFactory.getLogger(RegisterHandler.class);
     @Resource(name = "playerService")

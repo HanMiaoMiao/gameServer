@@ -27,12 +27,14 @@ public class CommandFactory {
                     return command;
                 }
                 case "exit":{
-                    return null;
+                    command = new ExitCommand(playerName);
+                    command.setCommandName("exit");
+                    return command;
                 }
                 default:
-                    System.out.println("************************************");
-                    System.out.println("指令错误！");
-                    System.out.println("************************************");
+                    System.out.println("****************************************************************************");
+                    System.out.println("***********************************指令错误**********************************");
+                    System.out.println("****************************************************************************");
                     return null;
             }
 
@@ -72,6 +74,11 @@ public class CommandFactory {
                     command.setCommandSign(CommandSign.VIEW);
                     return command;
                 }
+                default:
+                    System.out.println("****************************************************************************");
+                    System.out.println("***********************************指令错误**********************************");
+                    System.out.println("****************************************************************************");
+                    return null;
             }
         }
         if(split.length==4){
@@ -92,6 +99,11 @@ public class CommandFactory {
                     command.setCommandSign(CommandSign.ATTACK);
                     return command;
                 }
+                default:
+                    System.out.println("****************************************************************************");
+                    System.out.println("***********************************指令错误**********************************");
+                    System.out.println("****************************************************************************");
+                    return null;
             }
         }
         return null;

@@ -35,14 +35,20 @@ public class AttackCommand extends Command {
     public MessageProto.Message serverExcute() {
         System.out.println("attack");
         String resp;
+        MessageProto.Message.Builder builder = MessageProto.Message.newBuilder();
         Player player = super.getMap().get(super.getPlayerName());
         String[] str = super.getOption();
         //从消息中获取要攻击的怪物
         Monster monster = player.getCurrentlyScene().getMonsters().get(Integer.parseInt(str[0]));
+        if(monster == null){
+            resp = "没有这个怪物";
+            builder.setObj(ByteString.copyFromUtf8(resp));
+            return builder.build();
+        }
         //从消息中获取要使用的技能
         System.out.println("Skill"+player.getSkills());
         Skill skill = player.getSkills().get(Integer.parseInt(str[1]));
-        MessageProto.Message.Builder builder = MessageProto.Message.newBuilder();
+
         builder.setType(MessageProto.MSG.Login_Resp);
         //得到怪物的生命值
         int monsterblood = monster.getMonsterBlood();

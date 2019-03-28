@@ -12,6 +12,7 @@ import com.huyu.protobuf.CommandReqProto;
 import com.huyu.protobuf.MessageProto;
 import com.huyu.protobuf.PlayerReqProto;
 import com.huyu.service.PlayerService;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
@@ -19,16 +20,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 处理登录请求
  */
+@ChannelHandler.Sharable
 @Component("loginHandler")
 public class LoginHandler extends ChannelHandlerAdapter {
     final static Logger logger = LoggerFactory.getLogger(LoginHandler.class);
     @Resource(name = "playerService")
     private PlayerService playerService;
-
+    private Map<String,Player> map;
+    private String playerName;
     public PlayerService getPlayerService() {
         return playerService;
     }
@@ -44,7 +48,7 @@ public class LoginHandler extends ChannelHandlerAdapter {
         MessageProto.Message mg = (MessageProto.Message)msg;
         //游戏在线玩家
         OnlinePlayer onlinePlayer = OnlinePlayer.getOnlinePlayer();
-        HashMap<String,Player> map = onlinePlayer.getPlayers();
+        this.map = onlinePlayer.getPlayers();
         System.out.println("Login"+mg.getTypeValue()+"   "+ MessageType.Login_Req);
         //验证是否是登录请求
         if(mg.getTypeValue() == MessageType.Login_Req){
@@ -52,6 +56,7 @@ public class LoginHandler extends ChannelHandlerAdapter {
             PlayerReqProto.PlayerReq playerReq = PlayerReqProto.PlayerReq.parseFrom(mg.getObj());
             System.out.println(playerReq.getPlayerName());
             System.out.println(playerReq.getPsw());
+            this.playerName = playerReq.getPlayerName();
             player.setName(playerReq.getPlayerName());
             player.setPassword(playerReq.getPsw());
             String inform = null;
@@ -93,6 +98,8 @@ public class LoginHandler extends ChannelHandlerAdapter {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         logger.info("LoginHandler.exceptionCaught()");
         System.out.println("LoginHandler.exception()");
+        //当发生异常关闭链路时，需要将客户端的信息从注册表删除 保证后续客户端可以重连成功
+        this.map.remove(this.playerName);
         cause.printStackTrace();
         ctx.close();
     }

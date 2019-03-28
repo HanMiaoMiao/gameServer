@@ -18,7 +18,7 @@ enum MSG{
     Speak_Req = 0x00000006;
     Use_Req = 0x00000007;
     View_Req = 0x00000008;
-
+    Exit_Req = 0x00000009;
 
     Login_Resp = 0x00001001;
     Register_Resp = 0x00001002;
@@ -28,4 +28,5 @@ enum MSG{
     Speak_Resp = 0x00001006;
     Use_Resp = 0x00001007;
     View_Resp = 0x00001008;
+    Exit_Resp = 0x0000000a;
 }
